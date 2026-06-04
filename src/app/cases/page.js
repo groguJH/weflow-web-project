@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function CasesPage() {
   return (
-    <div className="pt-16">
+    <div className="pt-[4.5rem]">
       <CasesGridSection />
     </div>
   );

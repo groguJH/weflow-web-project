@@ -1,16 +1,15 @@
 import Link from 'next/link';
+import SectionHeader from '@/components/ui/SectionHeader';
 import { AD_PLANS, PRICING_NOTICE } from '@/data/pricingText';
 
 export default function LandingAdPlansSection() {
   return (
-    <section className="relative py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      <div className="text-center mb-12">
-        <h2 className="text-2xl sm:text-3xl font-black text-white mb-2">{AD_PLANS.sectionTitle}</h2>
-      </div>
+    <section className="relative py-16 px-4 sm:px-6 lg:px-8 overflow-hidden" aria-labelledby="landing-ad-title">
+      <SectionHeader titleId="landing-ad-title" title={AD_PLANS.sectionTitle} className="mb-12" />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto mb-8">
+      <ul className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto mb-8">
         {AD_PLANS.plans.map((plan) => (
-          <div
+          <li
             key={plan.name}
             className="flex flex-col bg-slate-900/50 backdrop-blur-sm border border-white/[0.07] rounded-2xl p-6 hover:border-blue-500/30 transition-all duration-300 card-glow"
           >
@@ -22,7 +21,7 @@ export default function LandingAdPlansSection() {
             <ul className="space-y-2.5 flex-1 mb-6">
               {plan.tags.map((tag) => (
                 <li key={tag} className="flex items-start gap-2.5">
-                  <span className="mt-0.5 font-bold text-sm text-blue-400">✓</span>
+                  <span className="mt-0.5 font-bold text-sm text-blue-400" aria-hidden="true">✓</span>
                   <span className="text-sm text-slate-300">{tag}</span>
                 </li>
               ))}
@@ -34,9 +33,9 @@ export default function LandingAdPlansSection() {
             >
               신청하기
             </Link>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
 
       <p className="text-center text-sm text-slate-500">{PRICING_NOTICE}</p>
     </section>

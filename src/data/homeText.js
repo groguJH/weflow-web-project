@@ -41,31 +41,37 @@ export const BENEFITS = {
       title: 'weflow 케어플랜',
       desc: '제작+운영+광고+관리 원터치',
       icon: '🔗',
+      image: '/benefit_sponsor.jpg',
     },
     {
       title: '빠른 제작',
       desc: '3~7일 로켓배송',
       icon: '🚀',
+      image: '/benefit_make.jpg',
     },
     {
       title: '합리적인 가성비',
       desc: '퀄리티는 높게, 비용은 합리적으로',
       icon: '💰',
+      image: '/benefit_price.jpg',
     },
     {
       title: '24시간 상담대기',
       desc: '빠른 상담 및 피드백',
       icon: '📞',
+      image: '/benefit_counsel.jpg',
     },
     {
       title: '운영 · 광고 지원',
       desc: '사후관리서비스',
       icon: '📈',
+      image: '/benefit_sponsor.jpg',
     },
     {
       title: '문의 구조 설계',
       desc: '업종별 맞춤 문의 동선 구성',
       icon: '🎯',
+      image: '/benefit_design.jpg',
     },
   ],
 };

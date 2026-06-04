@@ -11,39 +11,36 @@ export default function Footer() {
       <div className="w-full px-8 sm:px-12 lg:px-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
 
-          {/* 1번: 로고 + 정보 + legal */}
-          <div className="flex flex-col">
-            <Link href="/">
+          <section className="flex flex-col" aria-labelledby="footer-brand">
+            <Link href="/" aria-label="WEFLOW 홈으로 이동">
               <Image src="/logo_icon.png" alt="WEFLOW" width={40} height={40} className="size-10 object-contain" />
             </Link>
+            <h2 id="footer-brand" className="sr-only">WEFLOW 회사 정보</h2>
             <p className="mt-4 text-sm text-slate-400 leading-relaxed whitespace-pre-line">
               {FOOTER.tagline}
             </p>
-            <div className="mt-5 space-y-1.5 text-xs text-slate-500">
+            <address className="mt-5 space-y-1.5 text-xs text-slate-500 not-italic">
               <p>{FOOTER.info.ceo}</p>
               <p>{FOOTER.info.bizNo}</p>
               <p>{FOOTER.info.email}</p>
               <p>{FOOTER.info.hours}</p>
-            </div>
+            </address>
             <div className="mt-6 pt-5 border-t border-white/[0.06]">
-              <div className="flex items-center gap-3 mb-2">
+              <nav className="flex items-center gap-3 mb-2" aria-label="약관 메뉴">
                 {FOOTER.legal.map((item, i) => (
                   <span key={item} className="flex items-center gap-3">
                     <Link href="#" className="text-xs text-slate-500 hover:text-slate-300 transition-colors">{item}</Link>
-                    {i < FOOTER.legal.length - 1 && <span className="text-slate-700">|</span>}
+                    {i < FOOTER.legal.length - 1 && <span className="text-slate-700" aria-hidden="true">|</span>}
                   </span>
                 ))}
-              </div>
+              </nav>
               <p className="text-xs text-slate-600">{FOOTER.copyright}</p>
             </div>
-          </div>
+          </section>
 
-          {/* 2·3·4번 */}
           <div className="md:col-span-3 flex gap-10 md:pt-16 md:pl-32">
-
-            {/* 서비스 */}
-            <div className="flex-1">
-              <h4 className="text-sm font-semibold text-white mb-4">{FOOTER.links.service.title}</h4>
+            <nav className="flex-1" aria-label={FOOTER.links.service.title}>
+              <h2 className="text-sm font-semibold text-white mb-4">{FOOTER.links.service.title}</h2>
               <ul className="space-y-2.5">
                 {FOOTER.links.service.items.map((item) => (
                   <li key={item.label}>
@@ -53,11 +50,10 @@ export default function Footer() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </nav>
 
-            {/* WEFLOW 케어플랜 */}
-            <div className="flex-1">
-              <h4 className="text-sm font-semibold text-white mb-4">{FOOTER.links.carePlan.title}</h4>
+            <nav className="flex-1" aria-label={FOOTER.links.carePlan.title}>
+              <h2 className="text-sm font-semibold text-white mb-4">{FOOTER.links.carePlan.title}</h2>
               <ul className="space-y-2.5">
                 {FOOTER.links.carePlan.items.map((item) => (
                   <li key={item.label}>
@@ -67,22 +63,21 @@ export default function Footer() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </nav>
 
-            {/* 상담문의 */}
-            <div className="flex-1">
-              <h4 className="text-sm font-semibold text-white mb-4">{FOOTER.links.contact.title}</h4>
+            <nav className="flex-1" aria-label={FOOTER.links.contact.title}>
+              <h2 className="text-sm font-semibold text-white mb-4">{FOOTER.links.contact.title}</h2>
               <ul className="space-y-2.5">
                 {FOOTER.links.contact.items.map((item) => (
                   <li key={item.label}>
                     <Link href={item.href} className="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-white transition-colors">
                       {item.label}
-                      <ExternalLink size="1em" className="text-[0.6875rem] text-slate-600" />
+                      <ExternalLink size="1em" className="text-[0.6875rem] text-slate-600" aria-hidden="true" />
                     </Link>
                   </li>
                 ))}
               </ul>
-            </div>
+            </nav>
 
           </div>
 

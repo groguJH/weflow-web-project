@@ -1,19 +1,22 @@
-﻿import Link from 'next/link';
+import Link from 'next/link';
+import SectionHeader from '@/components/ui/SectionHeader';
 import { CARE_PLANS } from '@/data/pricingText';
 
 export default function LandingCarePlansSection() {
   return (
-    <section className="relative py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section className="relative py-16 px-4 sm:px-6 lg:px-8 overflow-hidden" aria-labelledby="landing-care-title">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/8 to-transparent pointer-events-none" />
 
-      <div className="relative text-center mb-12">
-        <h2 className="text-2xl sm:text-3xl font-black text-white mb-2">{CARE_PLANS.sectionTitle}</h2>
-        <p className="text-sm text-slate-400">{CARE_PLANS.notice}</p>
-      </div>
+      <SectionHeader
+        titleId="landing-care-title"
+        title={CARE_PLANS.sectionTitle}
+        description={CARE_PLANS.notice}
+        className="relative mb-12"
+      />
 
-      <div className="relative grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      <ul className="relative grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
         {CARE_PLANS.plans.map((plan) => (
-          <div
+          <li
             key={plan.name}
             className={`relative flex flex-col rounded-2xl p-6 transition-all duration-300 ${
               plan.isTop
@@ -25,7 +28,7 @@ export default function LandingCarePlansSection() {
           >
             {plan.isTop && (
               <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs font-bold text-amber-900 bg-amber-400">
-                👑 올인원
+                올인원
               </span>
             )}
             {plan.popular && !plan.isTop && (
@@ -66,10 +69,9 @@ export default function LandingCarePlansSection() {
             >
               신청하기
             </Link>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
   );
 }
-

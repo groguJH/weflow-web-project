@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import SectionHeader from '@/components/ui/SectionHeader';
 import { CASES_PAGE } from '@/data/casesText';
 
 function CaseCard({ item }) {
   return (
-    <div className="bg-slate-900/50 backdrop-blur-sm border border-white/[0.06] rounded-xl overflow-hidden card-glow transition-all duration-300 hover:border-blue-500/30 hover:-translate-y-0.5">
+    <article className="bg-slate-900/50 backdrop-blur-sm border border-white/[0.06] rounded-xl overflow-hidden card-glow transition-all duration-300 hover:border-blue-500/30 hover:-translate-y-0.5">
       <div className="aspect-video relative overflow-hidden bg-gradient-to-br from-slate-800/60 to-slate-900/80">
         {item.img ? (
           <Image src={item.img} alt={item.title} fill className="object-cover" />
@@ -17,44 +18,46 @@ function CaseCard({ item }) {
           {item.category}
         </span>
       </div>
-      <div className="p-4 flex items-center justify-between">
-        <h3 className="text-sm font-bold text-white">{item.title}</h3>
+      <footer className="flex flex-col items-start gap-2 p-4 sm:flex-row sm:items-center sm:justify-between">
+        <h3 className="text-keep text-sm font-bold text-white">{item.title}</h3>
         <Link
           href={item.blogHref}
-          className="text-xs text-blue-400 hover:text-blue-300 font-medium transition-colors whitespace-nowrap ml-2"
+          className="ml-2 inline-flex cursor-pointer whitespace-nowrap text-xs font-medium text-blue-400 transition-[color,transform] duration-200 hover:-translate-y-0.5 hover:text-blue-300 active:translate-y-0"
         >
           자세히보기
         </Link>
-      </div>
-    </div>
+      </footer>
+    </article>
   );
 }
 
 export default function CasesGridSection() {
   return (
-    <section className="relative py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section className="relative py-16 px-4 sm:px-6 lg:px-8 overflow-hidden" aria-labelledby="cases-page-title">
       <div className="absolute -top-20 right-0 w-[31.25rem] h-[31.25rem] bg-cyan-400/7 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-600/8 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="relative flex flex-col items-center text-center mb-12">
-        <span className="px-4 py-1 rounded-full border border-blue-800/50 bg-blue-900/30 text-blue-400 text-xs font-bold tracking-[0.3em] uppercase mb-4">
-          S U C C E S S
-        </span>
-        <h1 className="text-3xl sm:text-4xl font-black bg-gradient-to-br from-white via-blue-100 to-violet-300 bg-clip-text text-transparent">
-          {CASES_PAGE.title}
-        </h1>
-      </div>
+      <SectionHeader
+        titleId="cases-page-title"
+        as="h1"
+        eyebrow="SUCCESS"
+        title={CASES_PAGE.title}
+        className="relative mb-12"
+        titleClassName="text-3xl sm:text-4xl bg-gradient-to-br from-white via-blue-100 to-violet-300 bg-clip-text text-transparent"
+      />
 
-      <div className="relative grid grid-cols-4 gap-4 max-w-7xl mx-auto">
+      <ul className="relative mx-auto grid max-w-7xl grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
         {CASES_PAGE.cases.map((item) => (
-          <CaseCard key={item.title} item={item} />
+          <li key={item.title}>
+            <CaseCard item={item} />
+          </li>
         ))}
-      </div>
+      </ul>
 
       <div className="text-center mt-12">
         <Link
           href={CASES_PAGE.moreHref}
-          className="inline-flex items-center px-8 py-3.5 rounded-xl font-bold text-white gradient-blue"
+          className="gradient-blue inline-flex cursor-pointer items-center whitespace-nowrap rounded-xl px-8 py-3.5 font-bold text-white transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0"
         >
           {CASES_PAGE.moreButton}
         </Link>

@@ -14,6 +14,7 @@ import {
   ShieldCheck,
   Star,
 } from 'lucide-react';
+import FormField from '@/components/ui/FormField';
 import { RESERVATION_PAGE } from '@/data/reservationText';
 
 const DAY_NAMES = ['일', '월', '화', '수', '목', '금', '토'];
@@ -65,11 +66,11 @@ export default function ReservationFormSection() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen pt-28 flex items-center justify-center px-4 relative overflow-hidden">
+      <section className="min-h-screen pt-28 flex items-center justify-center px-4 relative overflow-hidden" aria-live="polite">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500/6 rounded-full blur-3xl pointer-events-none" />
-        <div className="relative text-center max-w-md bg-slate-900/70 backdrop-blur-sm border border-white/[0.07] rounded-3xl p-12">
+        <article className="relative text-center max-w-md bg-slate-900/70 backdrop-blur-sm border border-white/[0.07] rounded-3xl p-12">
           <div className="w-16 h-16 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mx-auto mb-6">
-            <CheckCircle2 size="1em" className="text-[2rem] text-cyan-400" />
+            <CheckCircle2 size="1em" className="text-[2rem] text-cyan-400" aria-hidden="true" />
           </div>
           <h2 className="text-2xl font-black text-white mb-3">예약이 완료되었습니다!</h2>
           <p className="text-slate-400 text-sm mb-4">빠른 시간 내에 연락드리겠습니다.</p>
@@ -78,13 +79,13 @@ export default function ReservationFormSection() {
               {scheduleLabel}
             </div>
           )}
-        </div>
-      </div>
+        </article>
+      </section>
     );
   }
 
   return (
-    <section className="relative min-h-screen pt-24 pb-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section className="relative min-h-screen pt-24 pb-24 px-4 sm:px-6 lg:px-8 overflow-hidden" aria-labelledby="reservation-page-title">
       <div className="absolute -top-20 right-0 w-[37.5rem] h-[37.5rem] bg-cyan-400/8 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute top-1/2 -left-40 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[31.25rem] h-48 bg-blue-700/6 rounded-full blur-3xl pointer-events-none" />
@@ -95,21 +96,21 @@ export default function ReservationFormSection() {
           <span className="px-4 py-1.5 rounded-full border border-cyan-800/50 bg-cyan-900/20 text-cyan-400 text-xs font-semibold mb-5">
             무료 상담 예약 &nbsp;·&nbsp; 24시간 내 연락 &nbsp;·&nbsp; 맞춤 견적 제공
           </span>
-          <h1 className="text-3xl sm:text-5xl font-black mb-4 text-white">
+          <h1 id="reservation-page-title" className="text-3xl sm:text-5xl font-black mb-4 text-white">
             {RESERVATION_PAGE.title}
           </h1>
           <p className="text-slate-400 text-xs mb-3">{RESERVATION_PAGE.subtitle}</p>
           <div className="flex flex-wrap justify-center gap-4 text-xs text-slate-300">
             <span className="flex items-center gap-1.5">
-              <Zap size="1em" className="text-[0.875rem] text-yellow-400" />
+              <Zap size="1em" className="text-[0.875rem] text-yellow-400" aria-hidden="true" />
               평균 24시간 내 연락
             </span>
             <span className="flex items-center gap-1.5">
-              <ShieldCheck size="1em" className="text-[0.875rem] text-cyan-400" />
+              <ShieldCheck size="1em" className="text-[0.875rem] text-cyan-400" aria-hidden="true" />
               무료 진단 포함
             </span>
             <span className="flex items-center gap-1.5">
-              <Star size="1em" className="text-[0.875rem] text-amber-400" />
+              <Star size="1em" className="text-[0.875rem] text-amber-400" aria-hidden="true" />
               케어 플랜 상담 가능
             </span>
           </div>
@@ -118,30 +119,30 @@ export default function ReservationFormSection() {
         <div className="space-y-5">
 
           {/* Step 1: 날짜 선택 */}
-          <div className="bg-slate-900/70 backdrop-blur-sm border border-white/[0.07] rounded-2xl p-6">
+          <section className="bg-slate-900/70 backdrop-blur-sm border border-white/[0.07] rounded-2xl p-6" aria-labelledby="reservation-date-title">
             <div className="flex items-center gap-3 mb-6">
               <StepBadge number="1" />
-              <CalendarDays size="1em" className="text-[1.125rem] text-cyan-400" />
-              <h2 className="text-base font-bold text-white">날짜 선택</h2>
+              <CalendarDays size="1em" className="text-[1.125rem] text-cyan-400" aria-hidden="true" />
+              <h2 id="reservation-date-title" className="text-base font-bold text-white">날짜 선택</h2>
             </div>
             <Calendar selectedDate={selectedDate} onSelect={handleDateSelect} />
-          </div>
+          </section>
 
           {/* Step 2: 시간 선택 */}
-          <div className={`bg-slate-900/70 backdrop-blur-sm border rounded-2xl p-6 transition-all duration-300 ${
+          <section className={`bg-slate-900/70 backdrop-blur-sm border rounded-2xl p-6 transition-all duration-300 ${
             selectedDate ? 'border-white/[0.07]' : 'border-white/[0.04] opacity-50'
-          }`}>
+          }`} aria-labelledby="reservation-time-title">
             <div className="flex items-center gap-3 mb-6">
               <StepBadge number="2" />
-              <Clock size="1em" className={`text-[1.125rem] ${selectedDate ? 'text-cyan-400' : 'text-slate-600'}`} />
-              <h2 className={`text-base font-bold ${selectedDate ? 'text-white' : 'text-slate-600'}`}>
+              <Clock size="1em" className={`text-[1.125rem] ${selectedDate ? 'text-cyan-400' : 'text-slate-600'}`} aria-hidden="true" />
+              <h2 id="reservation-time-title" className={`text-base font-bold ${selectedDate ? 'text-white' : 'text-slate-600'}`}>
                 시간 선택
               </h2>
             </div>
 
             {!selectedDate ? (
               <div className="py-8 text-center">
-                <CalendarDays size="1em" className="text-[1.75rem] text-slate-700 mx-auto mb-3" />
+                <CalendarDays size="1em" className="text-[1.75rem] text-slate-700 mx-auto mb-3" aria-hidden="true" />
                 <p className="text-sm text-slate-600">먼저 날짜를 선택해 주세요</p>
               </div>
             ) : (
@@ -151,6 +152,7 @@ export default function ReservationFormSection() {
                     key={time}
                     type="button"
                     onClick={() => setSelectedTime(time)}
+                    aria-pressed={selectedTime === time}
                     className={`py-2.5 rounded-xl text-xs font-semibold transition-all duration-200 ${
                       selectedTime === time
                         ? 'bg-cyan-500/20 border border-cyan-500/60 text-cyan-300 shadow-sm shadow-cyan-500/20'
@@ -162,15 +164,15 @@ export default function ReservationFormSection() {
                 ))}
               </div>
             )}
-          </div>
+          </section>
 
           {/* 선택된 일정 요약 */}
           {selectedDate && (
-            <div className={`flex items-center gap-4 px-5 py-4 rounded-2xl border transition-all duration-300 ${
+            <aside className={`flex items-center gap-4 px-5 py-4 rounded-2xl border transition-all duration-300 ${
               selectedTime
                 ? 'bg-cyan-500/10 border-cyan-500/30'
                 : 'bg-slate-900/50 border-white/[0.06]'
-            }`}>
+            }`} aria-live="polite">
               <div className={`w-2 h-2 rounded-full flex-shrink-0 ${
                 selectedTime ? 'bg-cyan-400 animate-pulse' : 'bg-slate-600'
               }`} />
@@ -181,25 +183,22 @@ export default function ReservationFormSection() {
                   {!selectedTime && <span className="text-slate-600"> — 시간을 선택해 주세요</span>}
                 </p>
               </div>
-            </div>
+            </aside>
           )}
 
           {/* Step 3: 상담 신청 폼 */}
-          <div className="bg-slate-900/70 backdrop-blur-sm border border-white/[0.07] rounded-2xl p-6">
+          <section className="bg-slate-900/70 backdrop-blur-sm border border-white/[0.07] rounded-2xl p-6" aria-labelledby="reservation-info-title">
             <div className="flex items-center gap-3 mb-6">
               <StepBadge number="3" />
-              <FileText size="1em" className="text-[1.125rem] text-cyan-400" />
-              <h2 className="text-base font-bold text-white">상담 신청 정보</h2>
+              <FileText size="1em" className="text-[1.125rem] text-cyan-400" aria-hidden="true" />
+              <h2 id="reservation-info-title" className="text-base font-bold text-white">상담 신청 정보</h2>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
 
-              <div>
-                <label className="flex items-center gap-1.5 text-xs text-slate-400 mb-1.5 font-medium">
-                  <User size="1em" className="text-[0.75rem] text-cyan-500/70" />
-                  {form.name.label}
-                </label>
+              <FormField id="reservation-name" label={form.name.label} icon={User}>
                 <input
+                  id="reservation-name"
                   type="text"
                   name="name"
                   value={formData.name}
@@ -208,14 +207,11 @@ export default function ReservationFormSection() {
                   required
                   className="w-full bg-slate-800/60 border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white placeholder-slate-600 transition-colors"
                 />
-              </div>
+              </FormField>
 
-              <div>
-                <label className="flex items-center gap-1.5 text-xs text-slate-400 mb-1.5 font-medium">
-                  <Phone size="1em" className="text-[0.75rem] text-cyan-500/70" />
-                  {form.phone.label}
-                </label>
+              <FormField id="reservation-phone" label={form.phone.label} icon={Phone}>
                 <input
+                  id="reservation-phone"
                   type="tel"
                   name="phone"
                   value={formData.phone}
@@ -224,14 +220,11 @@ export default function ReservationFormSection() {
                   required
                   className="w-full bg-slate-800/60 border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white placeholder-slate-600 transition-colors"
                 />
-              </div>
+              </FormField>
 
-              <div>
-                <label className="flex items-center gap-1.5 text-xs text-slate-400 mb-1.5 font-medium">
-                  <Briefcase size="1em" className="text-[0.75rem] text-cyan-500/70" />
-                  {form.type.label}
-                </label>
+              <FormField id="reservation-type" label={form.type.label} icon={Briefcase}>
                 <select
+                  id="reservation-type"
                   name="type"
                   value={formData.type}
                   onChange={handleChange}
@@ -243,14 +236,11 @@ export default function ReservationFormSection() {
                     <option key={opt} value={opt}>{opt}</option>
                   ))}
                 </select>
-              </div>
+              </FormField>
 
-              <div>
-                <label className="flex items-center gap-1.5 text-xs text-slate-400 mb-1.5 font-medium">
-                  <Briefcase size="1em" className="text-[0.75rem] text-cyan-500/70" />
-                  {form.industry.label}
-                </label>
+              <FormField id="reservation-industry" label={form.industry.label} icon={Briefcase}>
                 <input
+                  id="reservation-industry"
                   type="text"
                   name="industry"
                   value={formData.industry}
@@ -259,14 +249,11 @@ export default function ReservationFormSection() {
                   required
                   className="w-full bg-slate-800/60 border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white placeholder-slate-600 transition-colors"
                 />
-              </div>
+              </FormField>
 
-              <div>
-                <label className="flex items-center gap-1.5 text-xs text-slate-400 mb-1.5 font-medium">
-                  <FileText size="1em" className="text-[0.75rem] text-cyan-500/70" />
-                  {form.request.label}
-                </label>
+              <FormField id="reservation-request" label={form.request.label} icon={FileText}>
                 <textarea
+                  id="reservation-request"
                   name="request"
                   value={formData.request}
                   onChange={handleChange}
@@ -274,10 +261,11 @@ export default function ReservationFormSection() {
                   rows={4}
                   className="w-full bg-slate-800/60 border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white placeholder-slate-600 transition-colors resize-none"
                 />
-              </div>
+              </FormField>
 
-              <label className="flex items-start gap-3 cursor-pointer group">
+              <label htmlFor="reservation-agree" className="flex items-start gap-3 cursor-pointer group">
                 <input
+                  id="reservation-agree"
                   type="checkbox"
                   name="agree"
                   checked={formData.agree}
@@ -296,7 +284,7 @@ export default function ReservationFormSection() {
                 {form.submit}
               </button>
             </form>
-          </div>
+          </section>
 
         </div>
       </div>

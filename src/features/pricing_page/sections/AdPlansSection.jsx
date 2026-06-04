@@ -1,4 +1,6 @@
-import { Search, MapPin, Info } from 'lucide-react';
+import { Search, MapPin } from 'lucide-react';
+import SectionHeader from '@/components/ui/SectionHeader';
+import InfoNotice from '@/components/ui/InfoNotice';
 import { AD_PLANS, PRICING_NOTICE } from '@/data/pricingText';
 
 const THEME = {
@@ -24,26 +26,24 @@ const THEME = {
 
 export default function AdPlansSection() {
   return (
-    <section className="relative py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section className="relative py-16 px-4 sm:px-6 lg:px-8 overflow-hidden" aria-labelledby="ad-plans-title">
       <div className="absolute top-0 right-1/3 w-80 h-80 bg-cyan-400/6 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-1/3 w-80 h-80 bg-blue-600/8 rounded-full blur-3xl pointer-events-none" />
-      <div className="text-center mb-12">
-        <h2 className="text-2xl sm:text-3xl font-black text-white mb-2">{AD_PLANS.sectionTitle}</h2>
-      </div>
+      <SectionHeader titleId="ad-plans-title" title={AD_PLANS.sectionTitle} className="mb-12" />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+      <ul className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
         {AD_PLANS.plans.map((plan) => {
           const t = THEME[plan.theme];
           const Icon = t.icon;
           return (
-            <div
+            <li
               key={plan.name}
               className={`flex flex-col bg-slate-900/50 backdrop-blur-sm border border-slate-800/60 rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg min-h-[34.625rem] ${t.border}`}
             >
               {/* Icon + name */}
               <div className="flex items-center gap-3 mb-5">
                 <div className={`w-10 h-10 rounded-xl border flex items-center justify-center flex-shrink-0 ${t.iconBg}`}>
-                  <Icon size="1em" className={`${t.iconColor} text-[1.125rem]`} />
+                  <Icon size="1em" className={`${t.iconColor} text-[1.125rem]`} aria-hidden="true" />
                 </div>
                 <h3 className="text-lg font-black text-white">{plan.name}</h3>
               </div>
@@ -65,16 +65,15 @@ export default function AdPlansSection() {
                   </span>
                 ))}
               </div>
-            </div>
+            </li>
           );
         })}
-      </div>
+      </ul>
 
       <div className="flex justify-center mt-8">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-slate-700/60 bg-slate-900/40 text-slate-400 text-xs">
-          <Info size="1em" className="text-[0.8125rem] text-slate-500 flex-shrink-0" />
+        <InfoNotice>
           {PRICING_NOTICE}
-        </div>
+        </InfoNotice>
       </div>
 
       {/* 도메인 안내 */}

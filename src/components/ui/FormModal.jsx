@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import FormField from '@/components/ui/FormField';
 import { STICKY_FORM } from '@/data/commonText';
 
 export default function FormModal() {
@@ -71,16 +72,12 @@ export default function FormModal() {
       <div
         className="relative w-full max-w-md bg-slate-900/95 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-6 shadow-2xl shadow-black/50 animate-modal-in"
         onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="diagnosis-modal-title"
       >
         {/* 상단 글로우 */}
         <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-64 h-16 bg-blue-500/20 rounded-full blur-2xl pointer-events-none" />
-
-        {/* 닫기 버튼 — 모달 전체 커버 (z-0) */}
-        <button
-          onClick={close}
-          className="absolute inset-0 w-full h-full rounded-2xl z-0"
-          aria-label="닫기"
-        />
 
         {/* X 아이콘 버튼 — 클릭 가능 (z-20) */}
         <button
@@ -94,7 +91,7 @@ export default function FormModal() {
         </button>
 
         {submitted ? (
-          <div className="text-center py-10">
+          <div className="text-center py-10" aria-live="polite">
             <div className="text-4xl mb-4">✅</div>
             <h3 className="text-lg font-bold text-white mb-2">접수 완료!</h3>
             <p className="text-sm text-slate-400">빠른 시간 내에 연락드리겠습니다.</p>
@@ -103,31 +100,31 @@ export default function FormModal() {
           <>
             <div className="relative z-10 mb-5">
               <p className="text-xs text-blue-400 font-semibold tracking-wider uppercase mb-1">{STICKY_FORM.title}</p>
-              <h3 className="text-lg font-bold text-white">{STICKY_FORM.subtitle}</h3>
+              <h3 id="diagnosis-modal-title" className="text-lg font-bold text-white">{STICKY_FORM.subtitle}</h3>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-3 relative z-10">
-              <div>
-                <label className="block text-xs text-slate-400 mb-1">{STICKY_FORM.fields.name.label}</label>
+              <FormField id="diagnosis-name" label={STICKY_FORM.fields.name.label}>
                 <input
+                  id="diagnosis-name"
                   type="text" name="name" value={form.name} onChange={handleChange}
                   placeholder={STICKY_FORM.fields.name.placeholder} required
                   className="w-full bg-slate-800/60 border border-white/[0.08] rounded-lg px-3 py-2.5 text-sm text-white placeholder-slate-500"
                 />
-              </div>
+              </FormField>
 
-              <div>
-                <label className="block text-xs text-slate-400 mb-1">{STICKY_FORM.fields.phone.label}</label>
+              <FormField id="diagnosis-phone" label={STICKY_FORM.fields.phone.label}>
                 <input
+                  id="diagnosis-phone"
                   type="tel" name="phone" value={form.phone} onChange={handleChange}
                   placeholder={STICKY_FORM.fields.phone.placeholder} required
                   className="w-full bg-slate-800/60 border border-white/[0.08] rounded-lg px-3 py-2.5 text-sm text-white placeholder-slate-500"
                 />
-              </div>
+              </FormField>
 
-              <div>
-                <label className="block text-xs text-slate-400 mb-1">{STICKY_FORM.fields.type.label}</label>
+              <FormField id="diagnosis-type" label={STICKY_FORM.fields.type.label}>
                 <select
+                  id="diagnosis-type"
                   name="type" value={form.type} onChange={handleChange} required
                   className="w-full bg-slate-800/60 border border-white/[0.08] rounded-lg px-3 py-2.5 text-sm text-white"
                 >
@@ -136,28 +133,29 @@ export default function FormModal() {
                     <option key={opt} value={opt}>{opt}</option>
                   ))}
                 </select>
-              </div>
+              </FormField>
 
-              <div>
-                <label className="block text-xs text-slate-400 mb-1">{STICKY_FORM.fields.industry.label}</label>
+              <FormField id="diagnosis-industry" label={STICKY_FORM.fields.industry.label}>
                 <input
+                  id="diagnosis-industry"
                   type="text" name="industry" value={form.industry} onChange={handleChange}
                   placeholder={STICKY_FORM.fields.industry.placeholder} required
                   className="w-full bg-slate-800/60 border border-white/[0.08] rounded-lg px-3 py-2.5 text-sm text-white placeholder-slate-500"
                 />
-              </div>
+              </FormField>
 
-              <div>
-                <label className="block text-xs text-slate-400 mb-1">{STICKY_FORM.fields.request.label}</label>
+              <FormField id="diagnosis-request" label={STICKY_FORM.fields.request.label}>
                 <textarea
+                  id="diagnosis-request"
                   name="request" value={form.request} onChange={handleChange}
                   placeholder={STICKY_FORM.fields.request.placeholder} rows={3}
                   className="w-full bg-slate-800/60 border border-white/[0.08] rounded-lg px-3 py-2.5 text-sm text-white placeholder-slate-500 resize-none"
                 />
-              </div>
+              </FormField>
 
-              <label className="flex items-start gap-2 cursor-pointer">
+              <label htmlFor="diagnosis-agree" className="flex items-start gap-2 cursor-pointer">
                 <input
+                  id="diagnosis-agree"
                   type="checkbox" name="agree" checked={form.agree} onChange={handleChange}
                   className="mt-0.5 accent-blue-500"
                 />

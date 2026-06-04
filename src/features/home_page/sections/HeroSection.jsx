@@ -51,7 +51,7 @@ export default function HeroSection() {
   }
 
   return (
-    <section className="relative pt-24 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section className="relative pt-24 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden" aria-labelledby="home-hero-title">
       {/* 앰비언트 글로우 블롭 */}
       <div className="absolute -top-40 right-0 w-[50rem] h-[50rem] bg-cyan-400/8 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute top-20 -left-40 w-96 h-96 bg-blue-600/12 rounded-full blur-3xl pointer-events-none" />
@@ -64,7 +64,7 @@ export default function HeroSection() {
           {/* ── 좌측: 텍스트 콘텐츠 ── */}
           <div className="flex-1 py-8 lg:py-16">
             <RevealOnce isReady={isReady} playIntro={playIntro} delay={0.35}>
-              <h1 className="text-5xl sm:text-6xl lg:text-6xl xl:text-7xl font-black leading-tight tracking-tight mb-6 bg-gradient-to-br from-white via-blue-100 to-violet-300 bg-clip-text text-transparent">
+              <h1 id="home-hero-title" className="text-keep mb-6 bg-gradient-to-br from-white via-blue-100 to-violet-300 bg-clip-text text-5xl font-black leading-tight tracking-tight text-transparent sm:text-6xl lg:text-6xl xl:text-7xl">
                 {HERO.headline[0]}
                 <br />
                 {HERO.headline[1]}
@@ -74,7 +74,7 @@ export default function HeroSection() {
             </RevealOnce>
 
             <RevealOnce isReady={isReady} playIntro={playIntro} delay={1.55}>
-              <p className="text-slate-400 text-base sm:text-lg leading-relaxed mb-8 max-w-lg">
+              <p className="text-keep text-pretty mb-8 max-w-lg text-base leading-relaxed text-slate-400 sm:text-lg">
                 {HERO.sub[0]}
                 <br />
                 {HERO.sub[1]}
@@ -83,7 +83,7 @@ export default function HeroSection() {
               <div className="flex flex-wrap gap-3 mb-10">
                 <button
                   onClick={openModal}
-                  className="inline-flex items-center rounded-xl bg-blue-600 px-7 py-3.5 text-sm font-bold text-white transition-colors duration-200 hover:bg-blue-500"
+                  className="inline-flex cursor-pointer items-center whitespace-nowrap rounded-xl bg-blue-600 px-7 py-3.5 text-sm font-bold text-white transition-colors duration-200 hover:bg-blue-500"
                 >
                   {HERO.buttons[0].label}
                 </button>
@@ -92,7 +92,7 @@ export default function HeroSection() {
                   <Link
                     key={btn.label}
                     href={btn.href}
-                    className="inline-flex items-center rounded-xl border border-white/[0.08] bg-slate-900/60 px-6 py-3.5 text-sm font-semibold text-slate-300 backdrop-blur-sm transition-colors duration-200 hover:bg-slate-800/70 hover:text-white"
+                    className="inline-flex cursor-pointer items-center whitespace-nowrap rounded-xl border border-white/[0.08] bg-slate-900/60 px-6 py-3.5 text-sm font-semibold text-slate-300 backdrop-blur-sm transition-[background-color,color,transform] duration-200 hover:-translate-y-0.5 hover:bg-slate-800/85 hover:text-white active:translate-y-0"
                   >
                     {btn.label}
                   </Link>

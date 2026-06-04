@@ -1,4 +1,4 @@
-﻿import ProductionPlansSection from '@/features/pricing_page/sections/ProductionPlansSection';
+import ProductionPlansSection from '@/features/pricing_page/sections/ProductionPlansSection';
 import CarePlansSection from '@/features/pricing_page/sections/CarePlansSection';
 import AdPlansSection from '@/features/pricing_page/sections/AdPlansSection';
 
@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function PricingPage() {
   return (
-    <div className="pt-16">
+    <div className="pt-[4.5rem]">
       <div className="relative px-4 sm:px-6 lg:px-8 py-12 overflow-hidden">
         <div className="absolute -top-20 right-0 w-[31.25rem] h-[31.25rem] bg-cyan-400/7 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-600/8 rounded-full blur-3xl pointer-events-none" />
@@ -31,4 +31,3 @@ export default function PricingPage() {
     </div>
   );
 }
-

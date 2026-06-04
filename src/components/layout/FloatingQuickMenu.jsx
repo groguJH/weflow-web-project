@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { animateScroll as scroll } from 'react-scroll';
 import {
   ArrowUp,
   CheckCircle2,
@@ -36,7 +37,7 @@ function QuickMenuContent({ item }) {
 
   return (
     <>
-      <Icon size="1em" className={item.compactIcon ? 'text-[1rem]' : 'text-[1.375rem]'} />
+      <Icon size="1em" className={item.compactIcon ? 'text-[1rem]' : 'text-[1.375rem]'} aria-hidden="true" />
       <span
         className="block w-full whitespace-nowrap text-center text-[0.75rem] font-black leading-none"
       >
@@ -58,7 +59,10 @@ export default function FloatingQuickMenu() {
   }
 
   function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scroll.scrollToTop({
+      duration: 650,
+      smooth: 'easeInOutQuart',
+    });
   }
 
   function handleAction(item) {
@@ -75,7 +79,7 @@ export default function FloatingQuickMenu() {
   return (
     <nav
       aria-label="빠른 상담 메뉴"
-      className="fixed right-5 top-1/2 z-40 hidden -translate-y-1/2 border border-white/[0.08] bg-slate-950/50 lg:flex lg:flex-col"
+      className="floating-quick-menu fixed right-5 top-1/2 z-40 hidden -translate-y-1/2 flex-col border border-white/[0.08] bg-slate-950/50 md:flex"
     >
       {FLOATING_QUICK_MENU.map((item) =>
         item.modal || item.action ? (
@@ -84,11 +88,12 @@ export default function FloatingQuickMenu() {
             type="button"
             onClick={() => handleAction(item)}
             className={quickMenuClass(item)}
+            aria-label={item.label}
           >
             <QuickMenuContent item={item} />
           </button>
         ) : (
-          <Link key={item.label} href={item.href} className={quickMenuClass(item)}>
+          <Link key={item.label} href={item.href} className={quickMenuClass(item)} aria-label={item.label}>
             <QuickMenuContent item={item} />
           </Link>
         )

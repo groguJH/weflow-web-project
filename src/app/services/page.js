@@ -1,4 +1,4 @@
-﻿import ServiceProcessSection from '@/features/services_page/sections/ServiceProcessSection';
+import ServiceProcessSection from '@/features/services_page/sections/ServiceProcessSection';
 import ManagementSystemSection from '@/features/services_page/sections/ManagementSystemSection';
 
 export const metadata = {
@@ -8,10 +8,9 @@ export const metadata = {
 
 export default function ServicesPage() {
   return (
-    <div className="pt-16">
+    <div className="pt-[4.5rem]">
       <ServiceProcessSection />
       <ManagementSystemSection />
     </div>
   );
 }
-

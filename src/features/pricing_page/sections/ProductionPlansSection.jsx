@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { Zap, Info } from 'lucide-react';
+import { Zap } from 'lucide-react';
+import InfoNotice from '@/components/ui/InfoNotice';
 import { PRODUCTION_PLANS, PRICING_NOTICE } from '@/data/pricingText';
 
 export default function ProductionPlansSection() {
@@ -7,13 +8,13 @@ export default function ProductionPlansSection() {
     <section className="relative py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[37.5rem] h-64 bg-cyan-400/7 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-72 h-72 bg-blue-600/8 rounded-full blur-3xl pointer-events-none" />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      <ul className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
         {PRODUCTION_PLANS.plans.map((plan) => {
           const isTop = plan.popular;
           const duration = plan.checklist.find((c) => c.item.includes('빠른 제작'))?.item;
 
           return (
-            <div
+            <li
               key={plan.name}
               className={`relative flex flex-col rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 ${
                 isTop
@@ -65,7 +66,6 @@ export default function ProductionPlansSection() {
                 <p className="text-xs text-slate-500 mt-1">VAT 포함</p>
               </div>
 
-              {/* Checklist */}
               <ul className="space-y-2.5 flex-1 mb-6">
                 {plan.checklist.map((item) => (
                   <li key={item.item} className="flex items-start gap-2.5">
@@ -87,16 +87,15 @@ export default function ProductionPlansSection() {
               >
                 신청하기
               </Link>
-            </div>
+            </li>
           );
         })}
-      </div>
+      </ul>
 
       <div className="flex justify-center mt-8">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-slate-700/60 bg-slate-900/40 text-slate-400 text-xs">
-          <Info size="1em" className="text-[0.8125rem] text-slate-500 flex-shrink-0" />
+        <InfoNotice>
           {PRICING_NOTICE}
-        </div>
+        </InfoNotice>
       </div>
     </section>
   );

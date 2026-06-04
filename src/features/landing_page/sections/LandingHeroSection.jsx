@@ -3,7 +3,7 @@ import { LANDING_HERO } from '@/data/landingText';
 
 export default function LandingHeroSection() {
   return (
-    <section className="relative pt-12 pb-16 overflow-hidden">
+    <section className="relative pt-12 pb-16 overflow-hidden" aria-labelledby="landing-hero-title">
       <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[43.75rem] h-[31.25rem] bg-blue-700/12 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute inset-0 bg-gradient-to-b from-blue-950/20 via-transparent to-transparent pointer-events-none" />
 
@@ -14,7 +14,7 @@ export default function LandingHeroSection() {
         </span>
 
         {/* 헤드라인 */}
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-tight mb-5 text-white">
+        <h1 id="landing-hero-title" className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-tight mb-5 text-white">
           {LANDING_HERO.headline[0]}
           <br />
           {LANDING_HERO.headline[1]}

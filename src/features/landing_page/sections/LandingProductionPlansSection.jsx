@@ -1,17 +1,20 @@
 import Link from 'next/link';
+import SectionHeader from '@/components/ui/SectionHeader';
 import { PRODUCTION_PLANS } from '@/data/pricingText';
 
 export default function LandingProductionPlansSection() {
   return (
-    <section className="relative py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      <div className="text-center mb-12">
-        <h2 className="text-2xl sm:text-3xl font-black text-white mb-2">{PRODUCTION_PLANS.sectionTitle}</h2>
-        <p className="text-sm text-slate-400">{PRODUCTION_PLANS.notice}</p>
-      </div>
+    <section className="relative py-16 px-4 sm:px-6 lg:px-8 overflow-hidden" aria-labelledby="landing-production-title">
+      <SectionHeader
+        titleId="landing-production-title"
+        title={PRODUCTION_PLANS.sectionTitle}
+        description={PRODUCTION_PLANS.notice}
+        className="mb-12"
+      />
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      <ul className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
         {PRODUCTION_PLANS.plans.map((plan) => (
-          <div
+          <li
             key={plan.name}
             className={`relative flex flex-col rounded-2xl p-6 transition-all duration-300 ${
               plan.popular
@@ -51,9 +54,9 @@ export default function LandingProductionPlansSection() {
             >
               신청하기
             </Link>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
   );
 }

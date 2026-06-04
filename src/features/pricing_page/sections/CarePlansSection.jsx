@@ -1,22 +1,25 @@
 import Link from 'next/link';
-import { Info } from 'lucide-react';
+import SectionHeader from '@/components/ui/SectionHeader';
+import InfoNotice from '@/components/ui/InfoNotice';
 import { CARE_PLANS, PRICING_NOTICE } from '@/data/pricingText';
 
 export default function CarePlansSection() {
   return (
-    <section className="relative py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section className="relative py-16 px-4 sm:px-6 lg:px-8 overflow-hidden" aria-labelledby="care-plans-title">
       <div className="absolute top-0 left-0 w-96 h-96 bg-cyan-400/6 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-600/8 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/8 to-transparent pointer-events-none" />
 
-      <div className="relative text-center mb-12">
-        <h2 className="text-2xl sm:text-3xl font-black text-white mb-2">{CARE_PLANS.sectionTitle}</h2>
-        <p className="text-sm text-slate-400">{CARE_PLANS.sub}</p>
-      </div>
+      <SectionHeader
+        titleId="care-plans-title"
+        title={CARE_PLANS.sectionTitle}
+        description={CARE_PLANS.sub}
+        className="relative mb-12"
+      />
 
-      <div className="relative grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      <ul className="relative grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
         {CARE_PLANS.plans.map((plan) => (
-          <div
+          <li
             key={plan.name}
             className={`relative flex flex-col rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 ${
               plan.isTop
@@ -83,15 +86,14 @@ export default function CarePlansSection() {
             >
               신청하기
             </Link>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
 
       <div className="flex flex-col items-center mt-8 gap-2">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-slate-700/60 bg-slate-900/40 text-slate-400 text-xs">
-          <Info size="1em" className="text-[0.8125rem] text-slate-500 flex-shrink-0" />
+        <InfoNotice>
           {PRICING_NOTICE}
-        </div>
+        </InfoNotice>
         <p className="text-[0.6875rem] text-slate-600 text-center leading-relaxed">
           ※ 유지보수는 텍스트, 이미지, 링크 등 경미한 수정 기준입니다.&nbsp;&nbsp;페이지 추가 및 기능 개발은 별도 비용이 발생할 수 있습니다.
         </p>
