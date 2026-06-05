@@ -1,8 +1,16 @@
 # WEFLOW 홈페이지 제작 과제
 
+<img width="500" height="auto" alt="image" src="https://github.com/user-attachments/assets/bdc802dc-328b-4f95-9feb-ea4fe1809433" />
+
 WEFLOW 랜딩/홈페이지 제작 서비스를 소개하고, 방문자가 상담 신청과 예약으로 이어질 수 있도록 구성한 Next.js 프로젝트입니다.
 
-기존 GitHub 저장소 [lmg90219679-eng/weflow-web](https://github.com/lmg90219679-eng/weflow-web)를 clone한 뒤, 전달받은 `위플로우 요구사항.xlsx`를 기준으로 필요한 기능과 화면을 분석해 구현했습니다.
+기존 GitHub 저장소 [lmg90219679-eng/weflow-web](https://github.com/lmg90219679-eng/weflow-web)를 clone한 뒤, 전달받은 
+메시지를 바탕으로 `위플로우 요구사항.xlsx`으로 정리하여 필요한 기능과 화면을 분석해 구현했습니다.
+
+ [🔗프로젝트 링크 바로가기](https://weflow-web-project.vercel.app/)
+
+ <br/>
+<br/>
 
 ## 목차
 
