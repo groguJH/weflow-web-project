@@ -7,8 +7,9 @@ WEFLOW 랜딩/홈페이지 제작 서비스를 소개하고, 방문자가 상담
 기존 GitHub 저장소 [lmg90219679-eng/weflow-web](https://github.com/lmg90219679-eng/weflow-web)를 clone한 뒤, 전달받은 
 메시지를 바탕으로 `위플로우 요구사항.xlsx`으로 정리하여 필요한 기능과 화면을 분석해 구현했습니다.
 
-[프로젝트 링크 바로가기 : [프로젝트 링크 바로가기](https://weflow-web-project.vercel.app/)](https://weflow-web-project.vercel.app/)
+ [🔗프로젝트 링크 바로가기](https://weflow-web-project.vercel.app/)]
 
+<br/>
 <br/>
 
 ## 목차
