@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import ReviewSlider from '@/components/ui/ReviewSlider';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
@@ -12,16 +13,23 @@ export default function ReviewSection() {
       <ScrollReveal
         as="header"
         name="home-reviews-heading"
-        className="relative mx-auto mb-10 flex w-full max-w-7xl flex-col items-start gap-4 px-4 sm:mb-12 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8"
+        className="relative mx-auto mb-8 flex w-full max-w-7xl flex-col items-center px-4 text-center sm:mb-10 sm:px-6 lg:px-8"
       >
         <h2 id="home-reviews-title" className="text-keep text-3xl font-black text-white sm:text-4xl lg:text-5xl">고객 후기</h2>
-        <Link href="/reservation" className="inline-flex cursor-pointer whitespace-nowrap text-sm font-medium text-blue-400 transition-[color,transform] duration-200 hover:-translate-y-0.5 hover:text-blue-300 active:translate-y-0">
-          후기 더보기 →
-        </Link>
       </ScrollReveal>
 
       <ScrollReveal name="home-reviews-slider" delay={120}>
-        <ReviewSlider size="large" />
+        <ReviewSlider size="large" direction="vertical" duration={88} />
+      </ScrollReveal>
+
+      <ScrollReveal name="home-reviews-more" delay={180} className="relative mt-8 flex justify-center px-4 sm:mt-10">
+        <Link
+          href="/reservation"
+          className="group inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-white/[0.08] bg-slate-900/70 px-6 py-3 text-sm font-bold text-white transition-[background-color,color,transform] duration-200 hover:-translate-y-0.5 hover:bg-slate-800/95 hover:text-white active:translate-y-0"
+        >
+          후기 더보기
+          <ArrowRight size="1em" className="text-[1rem] transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
+        </Link>
       </ScrollReveal>
     </section>
   );

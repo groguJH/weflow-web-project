@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { ArrowRight } from 'lucide-react';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import { CASES_SECTION } from '@/data/homeText';
 import { CASES_PAGE } from '@/data/casesText';
@@ -15,23 +16,24 @@ export default function CasesSection() {
       <div className="relative mx-auto flex w-full max-w-7xl flex-col gap-8 sm:gap-12 lg:flex-row lg:items-stretch lg:gap-16 xl:gap-20">
 
         {/* 좌측: 텍스트 영역 */}
-        <div className="flex flex-shrink-0 flex-col justify-between lg:w-[23rem]">
+        <div className="flex flex-shrink-0 flex-col lg:w-[23rem]">
           <ScrollReveal name="home-cases-copy">
             <h2 id="home-cases-title" className="text-balance text-keep mb-4 text-3xl font-black leading-tight text-white sm:mb-5 sm:text-4xl lg:text-5xl">
               {CASES_SECTION.heading.map((line, i) => (
                 <span key={i} className="block">{line}</span>
               ))}
             </h2>
-            <p className="text-pretty text-keep mb-6 text-base leading-relaxed text-slate-400 sm:mb-8 sm:text-lg">
+            <p className="text-pretty text-keep text-base leading-relaxed text-slate-400 sm:text-lg">
               {CASES_SECTION.sub}
             </p>
           </ScrollReveal>
-          <ScrollReveal name="home-cases-cta" delay={120}>
+          <ScrollReveal name="home-cases-cta" delay={120} className="mt-7 sm:mt-8">
             <Link
-              href="/reservation"
-              className="inline-flex cursor-pointer items-center self-start whitespace-nowrap rounded-xl bg-blue-600 px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-500/20 transition-[background-color,transform] duration-200 hover:-translate-y-0.5 hover:bg-blue-500 active:translate-y-0"
+              href="/cases"
+              className="group inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-white/[0.08] bg-slate-900/70 px-6 py-3 text-sm font-bold text-white transition-[background-color,color,transform] duration-200 hover:-translate-y-0.5 hover:bg-slate-800/95 hover:text-white active:translate-y-0"
             >
-              {CASES_SECTION.moreButton}
+              {CASES_SECTION.moreButton.replace(' →', '')}
+              <ArrowRight size="1em" className="text-[1rem] transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
             </Link>
           </ScrollReveal>
         </div>

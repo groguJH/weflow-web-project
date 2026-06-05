@@ -15,16 +15,40 @@ export default function StickyForm({ id = 'sticky-form' }) {
     agree: false,
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   function handleChange(e) {
     const { name, value, type, checked } = e.target;
     setForm((prev) => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     if (!form.agree) return alert('개인정보 수집 및 이용에 동의해 주세요.');
-    setSubmitted(true);
+
+    setSubmitting(true);
+    try {
+      const response = await fetch('/api/inquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...form,
+          source: id === 'landing-form' ? '랜딩 sticky 폼' : '무료진단 폼',
+        }),
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.message || '접수 중 문제가 발생했습니다.');
+        return;
+      }
+
+      setSubmitted(true);
+    } catch {
+      alert('접수 요청 중 문제가 발생했습니다.');
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   if (submitted) {
@@ -105,6 +129,7 @@ export default function StickyForm({ id = 'sticky-form' }) {
             value={form.industry}
             onChange={handleChange}
             placeholder={STICKY_FORM.fields.industry.placeholder}
+            required
             className={inputClass}
           />
         </FormField>
@@ -135,9 +160,10 @@ export default function StickyForm({ id = 'sticky-form' }) {
 
         <button
           type="submit"
+          disabled={submitting}
           className="w-full gradient-blue text-white font-bold py-3.5 rounded-xl text-sm mt-2"
         >
-          {STICKY_FORM.submit}
+          {submitting ? '접수 중...' : STICKY_FORM.submit}
         </button>
       </form>
     </section>

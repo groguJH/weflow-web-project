@@ -1,6 +1,7 @@
 ﻿'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import {
   CalendarDays,
@@ -18,11 +19,25 @@ import FormField from '@/components/ui/FormField';
 import { RESERVATION_PAGE } from '@/data/reservationText';
 
 const DAY_NAMES = ['일', '월', '화', '수', '목', '금', '토'];
+const CUSTOM_HOURS = Array.from({ length: 24 }, (_, hour) => String(hour).padStart(2, '0'));
+const CUSTOM_MINUTES = Array.from({ length: 60 }, (_, minute) => String(minute).padStart(2, '0'));
 
 const Calendar = dynamic(() => import('./CalendarPicker'), {
   ssr: false,
   loading: () => <div className="min-h-[21.25rem]" />,
 });
+
+function formatDateValue(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+function formatCustomTime(hour, minute) {
+  if (!hour || !minute) return '';
+  return `${hour}:${minute}`;
+}
 
 function StepBadge({ number }) {
   return (
@@ -38,14 +53,35 @@ export default function ReservationFormSection() {
 
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState('');
+  const [customHour, setCustomHour] = useState('');
+  const [customMinute, setCustomMinute] = useState('');
   const [formData, setFormData] = useState({
     name: '', phone: '', type: '', industry: '', request: '', agree: false,
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   function handleDateSelect(date) {
     setSelectedDate(date);
     setSelectedTime('');
+    setCustomHour('');
+    setCustomMinute('');
+  }
+
+  function handleTimeSelect(time) {
+    setSelectedTime(time);
+    setCustomHour('');
+    setCustomMinute('');
+  }
+
+  function handleCustomTimeSelect(e) {
+    const { name, value } = e.target;
+    const nextHour = name === 'customHour' ? value : customHour;
+    const nextMinute = name === 'customMinute' ? value : customMinute;
+
+    setCustomHour(nextHour);
+    setCustomMinute(nextMinute);
+    setSelectedTime(formatCustomTime(nextHour, nextMinute));
   }
 
   function handleChange(e) {
@@ -53,11 +89,35 @@ export default function ReservationFormSection() {
     setFormData((prev) => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    if (!selectedDate || !selectedTime) return alert('날짜와 시간을 선택해주세요.');
+    if (!selectedDate || !selectedTime) return alert('날짜와 시간대를 선택하거나 입력해 주세요.');
     if (!formData.agree) return alert('개인정보 수집 및 상담 동의에 체크해 주세요.');
-    setSubmitted(true);
+
+    setSubmitting(true);
+    try {
+      const response = await fetch('/api/reservations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          preferredDate: formatDateValue(selectedDate),
+          preferredTime: selectedTime,
+        }),
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.message || '예약 접수 중 문제가 발생했습니다.');
+        return;
+      }
+
+      setSubmitted(true);
+    } catch {
+      alert('예약 요청 중 문제가 발생했습니다.');
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   const scheduleLabel = selectedDate
@@ -79,6 +139,12 @@ export default function ReservationFormSection() {
               {scheduleLabel}
             </div>
           )}
+          <Link
+            href="/"
+            className="mt-6 inline-flex cursor-pointer items-center justify-center whitespace-nowrap rounded-xl border border-white/[0.08] bg-slate-900/70 px-6 py-3 text-sm font-bold text-white transition-[background-color,color] duration-200 hover:bg-slate-800/95 hover:text-white"
+          >
+            홈으로 가기
+          </Link>
         </article>
       </section>
     );
@@ -146,22 +212,66 @@ export default function ReservationFormSection() {
                 <p className="text-sm text-slate-600">먼저 날짜를 선택해 주세요</p>
               </div>
             ) : (
-              <div className="grid grid-cols-4 sm:grid-cols-6 gap-2">
-                {timeSlots.map((time) => (
-                  <button
-                    key={time}
-                    type="button"
-                    onClick={() => setSelectedTime(time)}
-                    aria-pressed={selectedTime === time}
-                    className={`py-2.5 rounded-xl text-xs font-semibold transition-all duration-200 ${
-                      selectedTime === time
-                        ? 'bg-cyan-500/20 border border-cyan-500/60 text-cyan-300 shadow-sm shadow-cyan-500/20'
-                        : 'bg-slate-800/60 border border-white/[0.06] text-slate-300 hover:border-cyan-500/30 hover:text-cyan-300 hover:bg-cyan-500/5'
-                    }`}
+              <div className="space-y-5">
+                <div className="grid grid-cols-4 sm:grid-cols-6 gap-2">
+                  {timeSlots.map((time) => {
+                    const isSelectedSlot = selectedTime === time && !customHour && !customMinute;
+
+                    return (
+                      <button
+                        key={time}
+                        type="button"
+                        onClick={() => handleTimeSelect(time)}
+                        aria-pressed={isSelectedSlot}
+                        className={`py-2.5 rounded-xl text-xs font-semibold transition-all duration-200 ${
+                          isSelectedSlot
+                            ? 'bg-cyan-500/20 border border-cyan-500/60 text-cyan-300 shadow-sm shadow-cyan-500/20'
+                            : 'bg-slate-800/60 border border-white/[0.06] text-slate-300 hover:border-cyan-500/30 hover:text-cyan-300 hover:bg-cyan-500/5'
+                        }`}
+                      >
+                        {time}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="reservation-custom-hour"
+                    className="mb-2 block text-xs font-bold text-slate-300"
                   >
-                    {time}
-                  </button>
-                ))}
+                    {form.timePrefer.label} 직접 선택
+                  </label>
+                  <div className="grid grid-cols-2 gap-3">
+                    <select
+                      id="reservation-custom-hour"
+                      name="customHour"
+                      value={customHour}
+                      onChange={handleCustomTimeSelect}
+                      className="w-full rounded-xl border border-white/[0.08] bg-slate-800/60 px-4 py-3 text-sm text-white transition-colors focus:border-cyan-500/50 focus:outline-none"
+                    >
+                      <option value="">{form.timePrefer.hourPlaceholder}</option>
+                      {CUSTOM_HOURS.map((hour) => (
+                        <option key={hour} value={hour}>{hour}시</option>
+                      ))}
+                    </select>
+                    <select
+                      id="reservation-custom-minute"
+                      name="customMinute"
+                      value={customMinute}
+                      onChange={handleCustomTimeSelect}
+                      className="w-full rounded-xl border border-white/[0.08] bg-slate-800/60 px-4 py-3 text-sm text-white transition-colors focus:border-cyan-500/50 focus:outline-none"
+                    >
+                      <option value="">{form.timePrefer.minutePlaceholder}</option>
+                      {CUSTOM_MINUTES.map((minute) => (
+                        <option key={minute} value={minute}>{minute}분</option>
+                      ))}
+                    </select>
+                  </div>
+                  <p className="mt-2 text-xs leading-relaxed text-slate-500">
+                    시간 슬롯이 맞지 않으면 원하는 시와 분을 각각 선택해 주세요.
+                  </p>
+                </div>
               </div>
             )}
           </section>
@@ -279,9 +389,10 @@ export default function ReservationFormSection() {
 
               <button
                 type="submit"
+                disabled={submitting}
                 className="w-full gradient-blue text-white font-black py-4 rounded-xl text-sm tracking-wide mt-2"
               >
-                {form.submit}
+                {submitting ? '예약 접수 중...' : form.submit}
               </button>
             </form>
           </section>

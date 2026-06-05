@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { animateScroll as scroll } from 'react-scroll';
 import {
   ArrowUp,
@@ -32,6 +33,15 @@ const VARIANTS = {
     'border-slate-600/50 bg-slate-700 text-white hover:bg-slate-600',
 };
 
+function getLinkProps(href) {
+  if (!href?.startsWith('http')) return {};
+
+  return {
+    target: '_blank',
+    rel: 'noopener noreferrer',
+  };
+}
+
 function QuickMenuContent({ item }) {
   const Icon = ICONS[item.icon] ?? MessageCircle;
 
@@ -54,6 +64,12 @@ function quickMenuClass(item) {
 }
 
 export default function FloatingQuickMenu() {
+  const pathname = usePathname();
+
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
+
   function openDiagnosisModal() {
     window.dispatchEvent(new Event('open-diagnosis-modal'));
   }
@@ -93,7 +109,13 @@ export default function FloatingQuickMenu() {
             <QuickMenuContent item={item} />
           </button>
         ) : (
-          <Link key={item.label} href={item.href} className={quickMenuClass(item)} aria-label={item.label}>
+          <Link
+            key={item.label}
+            href={item.href}
+            className={quickMenuClass(item)}
+            aria-label={item.label}
+            {...getLinkProps(item.href)}
+          >
             <QuickMenuContent item={item} />
           </Link>
         )

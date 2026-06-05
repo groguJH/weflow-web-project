@@ -3,6 +3,15 @@ import Image from 'next/image';
 import { ExternalLink } from 'lucide-react';
 import { FOOTER } from '@/data/commonText';
 
+function getLinkProps(href) {
+  if (!href?.startsWith('http')) return {};
+
+  return {
+    target: '_blank',
+    rel: 'noopener noreferrer',
+  };
+}
+
 export default function Footer() {
   return (
     <footer className="relative bg-[#0a0f1e] border-t border-slate-800 pt-12 pb-6 mt-20 overflow-hidden">
@@ -28,8 +37,8 @@ export default function Footer() {
             <div className="mt-6 pt-5 border-t border-white/[0.06]">
               <nav className="flex items-center gap-3 mb-2" aria-label="약관 메뉴">
                 {FOOTER.legal.map((item, i) => (
-                  <span key={item} className="flex items-center gap-3">
-                    <Link href="#" className="text-xs text-slate-500 hover:text-slate-300 transition-colors">{item}</Link>
+                  <span key={item.href} className="flex items-center gap-3">
+                    <Link href={item.href} className="text-xs text-slate-500 hover:text-slate-300 transition-colors">{item.label}</Link>
                     {i < FOOTER.legal.length - 1 && <span className="text-slate-700" aria-hidden="true">|</span>}
                   </span>
                 ))}
@@ -70,7 +79,11 @@ export default function Footer() {
               <ul className="space-y-2.5">
                 {FOOTER.links.contact.items.map((item) => (
                   <li key={item.label}>
-                    <Link href={item.href} className="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-white transition-colors">
+                    <Link
+                      href={item.href}
+                      className="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-white transition-colors"
+                      {...getLinkProps(item.href)}
+                    >
                       {item.label}
                       <ExternalLink size="1em" className="text-[0.6875rem] text-slate-600" aria-hidden="true" />
                     </Link>

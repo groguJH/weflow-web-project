@@ -1,3 +1,13 @@
+export const CONTACT_LINKS = {
+  phone: "tel:01029717280",
+  email: "mailto:contact@weflowlab.kr",
+  kakao: "http://pf.kakao.com/_xntCbX",
+  blog: "https://m.blog.naver.com/weflowlab",
+  instagram: "https://www.instagram.com/weflowlab.kr",
+  facebook:
+    "https://www.facebook.com/profile.php?fb_profile_edit_entry_point=%7B%22click_point%22%3A%22edit_profile_button%22%2C%22feature%22%3A%22profile_header%22%7D&id=61590187124682&sk=about",
+};
+
 export const NAV = {
   logo: "WEFLOW",
   links: [
@@ -7,8 +17,12 @@ export const NAV = {
     { label: "예약", href: "/reservation" },
   ],
   authLinks: [
-    { label: "로그인", href: "/login" },
+    { label: "로그인", href: "/admin" },
     { label: "회원가입", href: "/signup" },
+  ],
+  adminLinks: [
+    { label: "관리자 대시보드", href: "/admin/dashboard" },
+    { label: "Case 페이지 수정", href: "/admin/cases" },
   ],
   cta: "무료진단받기",
 };
@@ -21,7 +35,10 @@ export const FOOTER = {
     email: "이메일 : contact@weflowlab.kr",
     hours: "운영시간 : 연중무휴 24시간 상담가능",
   },
-  legal: ["개인정보처리방침", "이용약관"],
+  legal: [
+    { label: "개인정보처리방침", href: "/privacy" },
+    { label: "이용약관", href: "/terms" },
+  ],
   copyright: "© 2026 WEFLOW. All rights reserved.",
   links: {
     service: {
@@ -43,20 +60,21 @@ export const FOOTER = {
     contact: {
       title: "상담문의",
       items: [
-        { label: "전화문의", href: "tel:" },
-        { label: "이메일 문의", href: "mailto:contact@weflowlab.kr" },
-        { label: "카카오 채널 문의", href: "#" },
-        { label: "인스타 문의", href: "#" },
-        { label: "블로그", href: "#" },
+        { label: "전화문의", href: CONTACT_LINKS.phone },
+        { label: "이메일 문의", href: CONTACT_LINKS.email },
+        { label: "카카오 채널 문의", href: CONTACT_LINKS.kakao },
+        { label: "블로그", href: CONTACT_LINKS.blog },
+        { label: "인스타 문의", href: CONTACT_LINKS.instagram },
+        { label: "페이스북", href: CONTACT_LINKS.facebook },
       ],
     },
   },
 };
 
 export const BOTTOM_BAR = [
-  { label: "24시간 상담 가능", href: "#", icon: "🕐" },
-  { label: "카카오톡상담", href: "#", icon: "💬" },
-  { label: "블로그", href: "#", icon: "📝" },
+  { label: "24시간 상담 가능", href: CONTACT_LINKS.phone, icon: "🕐" },
+  { label: "카카오톡상담", href: CONTACT_LINKS.kakao, icon: "💬" },
+  { label: "블로그", href: CONTACT_LINKS.blog, icon: "📝" },
   { label: "무료진단 상담", href: "#", icon: "✅", modal: true },
 ];
 
@@ -74,18 +92,18 @@ export const FLOATING_QUICK_MENU = [
   },
   {
     label: "카톡상담",
-    href: "#",
+    href: CONTACT_LINKS.kakao,
     icon: "message",
     variant: "kakao",
   },
   {
     label: "전화상담",
-    href: "tel:01029717280",
+    href: CONTACT_LINKS.phone,
     icon: "phone",
   },
   {
     label: "마이페이지",
-    href: "#",
+    href: "/admin",
     icon: "user",
   },
   {
