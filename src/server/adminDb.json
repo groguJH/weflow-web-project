@@ -1,0 +1,99 @@
+{
+  "admins": [
+    {
+      "id": "admin-001",
+      "username": "admin",
+      "password": "weflow1234",
+      "name": "WEFLOW 관리자",
+      "role": "owner",
+      "sessionToken": "weflow-local-admin-session"
+    }
+  ],
+  "reservations": [
+    {
+      "id": "rsv-mq0o22o5-tg6nqc",
+      "status": "waiting",
+      "name": "홍길동",
+      "phone": "01011111111",
+      "type": "랜딩 페이지 제작",
+      "industry": "피트니스",
+      "preferredDate": "2026-06-23",
+      "preferredTime": "16:16",
+      "request": "앱과 연동되는 사이트를 만들고싶습니다.",
+      "createdAt": "2026-06-05T08:32:38.405Z"
+    },
+    {
+      "id": "rsv-mq0m6qmh-0dz0us",
+      "status": "waiting",
+      "name": "홍길동",
+      "phone": "01012341234",
+      "type": "랜딩 & 홈페이지 제작",
+      "industry": "피트니스",
+      "preferredDate": "2026-06-06",
+      "preferredTime": "13:30",
+      "request": "홈페이지는 깔끔하게 해주시고 \n렌더링 사이트를 신경써서 만들어주세요",
+      "createdAt": "2026-06-05T07:40:16.841Z"
+    },
+    {
+      "id": "rsv-001",
+      "status": "completed",
+      "name": "김서연",
+      "phone": "010-1234-5678",
+      "type": "홈페이지 제작",
+      "industry": "필라테스",
+      "preferredDate": "2026-06-08",
+      "preferredTime": "14:00",
+      "request": "회원권 상담 문의가 잘 들어오도록 예약 버튼을 강조하고 싶습니다.",
+      "createdAt": "2026-06-04T10:15:00.000Z",
+      "updatedAt": "2026-06-05T07:08:45.164Z"
+    },
+    {
+      "id": "rsv-002",
+      "status": "completed",
+      "name": "박민준",
+      "phone": "010-8899-1122",
+      "type": "랜딩 페이지 제작",
+      "industry": "보험 설계",
+      "preferredDate": "2026-06-09",
+      "preferredTime": "11:30",
+      "request": "광고용 랜딩페이지와 카카오톡 상담 연결이 필요합니다.",
+      "createdAt": "2026-06-03T07:42:00.000Z"
+    }
+  ],
+  "inquiries": [
+    {
+      "id": "inq-001",
+      "status": "in-progress",
+      "source": "무료진단 모달",
+      "name": "이하늘",
+      "phone": "010-5555-7821",
+      "type": "랜딩 & 홈페이지 제작",
+      "industry": "스터디카페",
+      "request": "현재 사이트에서 문의가 거의 없어 무료진단을 받고 싶습니다.",
+      "createdAt": "2026-06-04T12:25:00.000Z",
+      "updatedAt": "2026-06-05T07:08:40.769Z"
+    },
+    {
+      "id": "inq-002",
+      "status": "in-progress",
+      "source": "랜딩 sticky 폼",
+      "name": "최지훈",
+      "phone": "010-2971-7280",
+      "type": "기타(weflow케어플랜)",
+      "industry": "미용실",
+      "request": "인스타 업로드와 블로그 관리까지 같이 상담받고 싶습니다.",
+      "createdAt": "2026-06-02T09:10:00.000Z"
+    },
+    {
+      "id": "inq-003",
+      "status": "completed",
+      "source": "무료진단 모달",
+      "name": "정유진",
+      "phone": "010-4321-8877",
+      "type": "홈페이지 제작",
+      "industry": "세무사 사무소",
+      "request": "전문성이 보이는 홈페이지와 검색 노출 상담이 필요합니다.",
+      "createdAt": "2026-06-01T15:05:00.000Z"
+    }
+  ]
+}
