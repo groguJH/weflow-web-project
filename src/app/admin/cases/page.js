@@ -2,15 +2,18 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import AdminAntdProvider from '@/components/admin/AdminAntdProvider';
 import AdminCasesClient from '@/features/admin/components/AdminCasesClient';
+import { createPageMetadata } from '@/data/metadata';
 import {
   ADMIN_SESSION_COOKIE,
   getAdminBySession,
 } from '@/server/adminStore';
 
-export const metadata = {
-  title: 'WEFLOW 사례 페이지 수정',
+export const metadata = createPageMetadata({
+  title: '사례 페이지 수정',
   description: 'WEFLOW 성공 사례 카드의 문구, 이미지, 링크를 수정하는 관리자 페이지입니다.',
-};
+  path: '/admin/cases',
+  noIndex: true,
+});
 
 export const runtime = 'nodejs';
 

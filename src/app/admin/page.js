@@ -2,15 +2,18 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import AdminAntdProvider from '@/components/admin/AdminAntdProvider';
 import AdminLoginForm from '@/features/admin/components/AdminLoginForm';
+import { createPageMetadata } from '@/data/metadata';
 import {
   ADMIN_SESSION_COOKIE,
   getAdminBySession,
 } from '@/server/adminStore';
 
-export const metadata = {
-  title: 'WEFLOW 관리자 로그인',
+export const metadata = createPageMetadata({
+  title: '관리자 로그인',
   description: 'WEFLOW 예약 및 문의 관리를 위한 관리자 로그인 페이지입니다.',
-};
+  path: '/admin',
+  noIndex: true,
+});
 
 export const runtime = 'nodejs';
 

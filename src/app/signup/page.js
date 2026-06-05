@@ -1,9 +1,12 @@
 import Link from 'next/link';
+import { createPageMetadata } from '@/data/metadata';
 
-export const metadata = {
-  title: 'WEFLOW 회원가입 준비 중',
+export const metadata = createPageMetadata({
+  title: '회원가입 준비 중',
   description: 'WEFLOW 회원가입 기능은 현재 준비 중입니다.',
-};
+  path: '/signup',
+  noIndex: true,
+});
 
 export default function SignupPage() {
   return (

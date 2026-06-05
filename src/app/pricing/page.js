@@ -1,11 +1,14 @@
 import ProductionPlansSection from '@/features/pricing_page/sections/ProductionPlansSection';
 import CarePlansSection from '@/features/pricing_page/sections/CarePlansSection';
 import AdPlansSection from '@/features/pricing_page/sections/AdPlansSection';
+import { createPageMetadata } from '@/data/metadata';
 
-export const metadata = {
-  title: 'WEFLOW 제작플랜&가격안내',
-  description: '랜딩페이지·홈페이지 제작플랜, 케어플랜, 광고플랜 가격을 확인하세요.',
-};
+export const metadata = createPageMetadata({
+  title: '제작플랜 및 가격안내',
+  description:
+    'START 랜딩페이지, GROW 홈페이지, MASTER 프리미엄 제작 플랜과 WEFLOW 케어 플랜 가격을 확인하세요.',
+  path: '/pricing',
+});
 
 export default function PricingPage() {
   return (

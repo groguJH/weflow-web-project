@@ -9,11 +9,14 @@ import LandingProductionPlansSection from '@/features/landing_page/sections/Land
 import LandingCarePlansSection from '@/features/landing_page/sections/LandingCarePlansSection';
 import LandingAdPlansSection from '@/features/landing_page/sections/LandingAdPlansSection';
 import { LANDING_NOTICE } from '@/data/landingText';
+import { createPageMetadata } from '@/data/metadata';
 
-export const metadata = {
-  title: 'WEFLOW 랜딩페이지 — 문의로 이어지는 홈페이지',
-  description: '기획부터 제작, 광고 연동, 운영 관리까지 WEFLOW가 함께합니다.',
-};
+export const metadata = createPageMetadata({
+  title: '랜딩페이지 제작',
+  description:
+    '문의로 이어지는 랜딩페이지를 기획부터 제작, 광고 연동, 운영 관리까지 WEFLOW가 함께합니다.',
+  path: '/landing',
+});
 
 export default function LandingPage() {
   return (

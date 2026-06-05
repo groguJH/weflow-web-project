@@ -2,15 +2,18 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import AdminAntdProvider from '@/components/admin/AdminAntdProvider';
 import AdminDashboardClient from '@/features/admin/components/AdminDashboardClient';
+import { createPageMetadata } from '@/data/metadata';
 import {
   ADMIN_SESSION_COOKIE,
   getAdminBySession,
 } from '@/server/adminStore';
 
-export const metadata = {
-  title: 'WEFLOW 관리자 대시보드',
+export const metadata = createPageMetadata({
+  title: '관리자 대시보드',
   description: 'WEFLOW 예약 및 문의 상태를 관리하는 관리자 대시보드입니다.',
-};
+  path: '/admin/dashboard',
+  noIndex: true,
+});
 
 export const runtime = 'nodejs';
 
