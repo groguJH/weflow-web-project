@@ -17,10 +17,6 @@ export const NAV = {
     { label: "성공사례", href: "/cases" },
     { label: "예약", href: "/reservation" },
   ],
-  adminLinks: [
-    { label: "관리자 대시보드", href: "/admin/dashboard" },
-    { label: "Case 페이지 수정", href: "/admin/cases" },
-  ],
   cta: "무료진단받기",
 };
 
