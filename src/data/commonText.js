@@ -12,13 +12,10 @@ export const NAV = {
   logo: "WEFLOW",
   links: [
     { label: "홈", href: "/" },
-    { label: "가격안내", href: "/pricing" },
+    { label: "서비스", href: "/services" },
+    { label: "제작플랜&가격안내", href: "/pricing" },
     { label: "성공사례", href: "/cases" },
     { label: "예약", href: "/reservation" },
-  ],
-  authLinks: [
-    { label: "로그인", href: "/admin" },
-    { label: "회원가입", href: "/signup" },
   ],
   adminLinks: [
     { label: "관리자 대시보드", href: "/admin/dashboard" },
@@ -32,7 +29,7 @@ export const FOOTER = {
   info: {
     ceo: "대표 : 신서준",
     bizNo: "사업자등록번호 : 884-07-03480",
-    email: "이메일 : contact@weflowlab.kr",
+    email: "이메일 : contact @ weflowlab.kr",
     hours: "운영시간 : 연중무휴 24시간 상담가능",
   },
   legal: [
@@ -60,12 +57,12 @@ export const FOOTER = {
     contact: {
       title: "상담문의",
       items: [
-        { label: "전화문의", href: CONTACT_LINKS.phone },
-        { label: "이메일 문의", href: CONTACT_LINKS.email },
-        { label: "카카오 채널 문의", href: CONTACT_LINKS.kakao },
-        { label: "블로그", href: CONTACT_LINKS.blog },
-        { label: "인스타 문의", href: CONTACT_LINKS.instagram },
-        { label: "페이스북", href: CONTACT_LINKS.facebook },
+        { label: "전화문의", href: CONTACT_LINKS.phone, icon: "phone" },
+        { label: "이메일 문의", href: CONTACT_LINKS.email, icon: "email" },
+        { label: "카카오 채널 문의", href: CONTACT_LINKS.kakao, icon: "kakao" },
+        { label: "인스타 문의", href: CONTACT_LINKS.instagram, icon: "instagram" },
+        { label: "네이버 블로그", href: CONTACT_LINKS.blog, icon: "naver" },
+        { label: "페이스북 문의", href: CONTACT_LINKS.facebook, icon: "facebook" },
       ],
     },
   },
@@ -78,42 +75,34 @@ export const BOTTOM_BAR = [
   { label: "무료진단 상담", href: "#", icon: "✅", modal: true },
 ];
 
-export const FLOATING_QUICK_MENU = [
-  {
-    label: "페이지 사례",
-    href: "/cases",
-    icon: "pages",
+export const FLOATING_CONTACT_CARD = {
+  title: "바로 상담 연결",
+  actions: [
+    {
+      label: "무료 진단 신청",
+      icon: "check",
+      modal: true,
+      variant: "primary",
+    },
+    {
+      label: "카카오톡 상담",
+      href: CONTACT_LINKS.kakao,
+      icon: "message",
+      variant: "outline",
+    },
+    {
+      label: "전화 문의",
+      href: CONTACT_LINKS.phone,
+      icon: "phone",
+      variant: "outline",
+    },
+  ],
+  shortcut: {
+    title: "문의 바로가기",
+    subtitle: "진단 · 카카오 · 전화",
+    badge: "W",
   },
-  {
-    label: "무료상담신청",
-    icon: "check",
-    modal: true,
-    variant: "primary",
-  },
-  {
-    label: "카톡상담",
-    href: CONTACT_LINKS.kakao,
-    icon: "message",
-    variant: "kakao",
-  },
-  {
-    label: "전화상담",
-    href: CONTACT_LINKS.phone,
-    icon: "phone",
-  },
-  {
-    label: "마이페이지",
-    href: "/admin",
-    icon: "user",
-  },
-  {
-    label: "Top",
-    icon: "top",
-    action: "scrollTop",
-    variant: "muted",
-    compactIcon: true,
-  },
-];
+};
 
 export const STICKY_FORM = {
   title: "무료 진단받기",
@@ -142,97 +131,29 @@ export const STICKY_FORM = {
 };
 
 export const REVIEWS = [
-  { text: "문의 버튼 위치 바꾸고 상담 문의가 확실히 늘었어요.", stars: 5 },
-  {
-    text: "처음엔 반신반의했는데 랜딩 페이지 만들고 나서 일주일 만에 상담 전화 3건이 왔어요.",
-    stars: 5,
-  },
-  {
-    text: "디자인이 너무 예뻐서 주변 원장님들한테 소개해드렸어요. 진짜 퀄리티 대박.",
-    stars: 5,
-  },
-  {
-    text: "3일 만에 완성됐는데 퀄리티가 이 가격에 이 정도면 진짜 가성비 최고입니다.",
-    stars: 5,
-  },
-  {
-    text: "광고 연동까지 해주셔서 따로 신경 쓸 게 없어요. 운영 관리도 너무 편해졌어요.",
-    stars: 5,
-  },
-  {
-    text: "모바일에서 문의하기 버튼 바로 보이게 해주셔서 스마트폰 고객 문의가 늘었어요.",
-    stars: 5,
-  },
-  {
-    text: "검색 상위에 올라오니까 따로 광고 안 해도 전화가 오더라고요. 신기했어요.",
-    stars: 5,
-  },
-  {
-    text: "제가 요청한 내용을 정말 꼼꼼히 반영해 주셔서 감동받았어요. 소통이 정말 잘 돼요.",
-    stars: 5,
-  },
-  {
-    text: "홈페이지 없을 땐 전화로만 받았는데, 지금은 문의 폼으로도 많이 들어와요.",
-    stars: 5,
-  },
-  {
-    text: "가격 대비 퀄리티가 압도적이에요. 비싼 업체랑 비교해도 전혀 뒤지지 않아요.",
-    stars: 5,
-  },
-  {
-    text: "카카오톡 상담 연동까지 해주셔서 고객 응대가 훨씬 편해졌어요.",
-    stars: 5,
-  },
-  {
-    text: "처음 홈페이지 제작인데 초보자도 이해하기 쉽게 설명해 주셔서 좋았어요.",
-    stars: 5,
-  },
-  {
-    text: "인스타 연동이랑 블로그 포스팅까지 해주시니 통합 관리가 너무 편해요.",
-    stars: 5,
-  },
-  {
-    text: "세무사 사무소인데 업종에 맞게 전문적으로 디자인해 주셨어요. 고객 반응 좋아요.",
-    stars: 5,
-  },
-  {
-    text: "수정 요청을 빠르게 반영해 주셔서 정말 만족스러워요. 24시간 대응 진짜예요.",
-    stars: 5,
-  },
-  {
-    text: "당근마켓 광고랑 연동하니 동네 손님이 눈에 띄게 늘었어요. 강력 추천합니다.",
-    stars: 5,
-  },
-  {
-    text: "인테리어 업체 운영하는데 시공 사례 갤러리 구성을 너무 예쁘게 해주셨어요.",
-    stars: 5,
-  },
-  {
-    text: "스터디카페 오픈하면서 만들었는데 예약 문의가 오픈 첫날부터 들어왔어요.",
-    stars: 5,
-  },
-  {
-    text: "네이버 상단에 올라오고 나서 자연 유입 고객이 확실히 늘었어요. 효과 만점!",
-    stars: 5,
-  },
-  {
-    text: "케어플랜으로 관리받으니 제가 따로 마케팅 신경 안 써도 돼서 너무 편해요.",
-    stars: 5,
-  },
-  {
-    text: "공인중개사 사무소인데 매물 문의가 홈페이지 통해서 많이 들어와요.",
-    stars: 5,
-  },
-  {
-    text: "미용실 예약 시스템도 연결해 주셔서 예약 관리가 훨씬 수월해졌어요.",
-    stars: 5,
-  },
-  {
-    text: "영어학원 원장인데 학부모님들이 홈페이지 보고 신뢰도가 생긴다고 하세요.",
-    stars: 5,
-  },
-  {
-    text: "법률사무소 홈페이지 만들고 나서 온라인 상담 문의가 2배로 늘었어요.",
-    stars: 5,
-  },
+  { author: "OO PT샵 대표", text: "문의 버튼 위치 바꾸고 상담 문의가 확실히 늘었어요.", stars: 5 },
+  { author: "OO 필라테스 대표", text: "수정 요청도 빠르게 처리해주셔서 만족합니다.", stars: 5 },
+  { author: "OO 헬스장 대표", text: "디자인보다 문의 구조를 신경 써주는 게 좋았습니다.", stars: 5 },
+  { author: "OO 보험설계 대표", text: "랜딩페이지 제작 후 상담 문의가 늘었어요.", stars: 5 },
+  { author: "OO 법률 사무소 대표", text: "설명도 쉽게 해주셔서 진행하기 편했습니다.", stars: 5 },
+  { author: "OO 세무사 사무소 대표", text: "광고 연결까지 한 번에 진행돼서 편했어요.", stars: 5 },
+  { author: "OO 공인중개사 대표", text: "피드백 속도가 진짜 빨랐습니다.", stars: 5 },
+  { author: "OO 카페 대표", text: "모바일 화면이 훨씬 보기 좋아졌어요.", stars: 5 },
+  { author: "OO 미용실 대표", text: "생각보다 제작 기간이 빨라 놀랐습니다.", stars: 5 },
+  { author: "OO 네일샵 대표", text: "업종 특성에 맞게 잘 만들어주셨어요.", stars: 5 },
+  { author: "OO 피부관리샵 대표", text: "기획부터 같이 잡아줘서 부담이 없었습니다.", stars: 5 },
+  { author: "OO 왁싱샵 대표", text: "광고 세팅 방향도 알려줘서 도움됐어요.", stars: 5 },
+  { author: "OO 반영구샵 대표", text: "예약 문의가 전보다 더 잘 들어옵니다.", stars: 5 },
+  { author: "OO 피부관리샵 대표", text: "PT샵 구조를 잘 이해하고 계시더라고요.", stars: 5 },
+  { author: "OO 애견미용 대표", text: "필라테스 문의 동선이 훨씬 좋아졌어요.", stars: 5 },
+  { author: "OO 반려동물 용품점 대표", text: "보험 상담 페이지가 깔끔하게 정리됐어요.", stars: 5 },
+  { author: "OO 키즈카페 대표", text: "수정 요청해도 응답이 빨라 좋았습니다.", stars: 5 },
+  { author: "OO 스터디카페 대표", text: "홈페이지 만들고 끝이 아니라 관리도 해줘요.", stars: 5 },
+  { author: "OO 영어학원 대표", text: "SEO 부분까지 신경 써줘서 만족합니다.", stars: 5 },
+  { author: "OO 입시학원 대표", text: "카카오 문의 연결이 편하게 바뀌었어요.", stars: 5 },
+  { author: "OO 개인과외 대표", text: "문의하기 버튼 위치가 확실히 효과 있네요.", stars: 5 },
+  { author: "OO 청소업체 대표", text: "초보라 아무것도 몰랐는데 쉽게 설명해줬어요.", stars: 5 },
+  { author: "OO 인테리어 업체 대표", text: "비용 부담이 생각보다 적었습니다.", stars: 5 },
+  { author: "OO 이사 업체 대표", text: "랜딩페이지 하나로 상담률이 올라갔어요.", stars: 5 },
+  { author: "OO 자동차 디테일링 대표", text: "다음 프로젝트도 위플로우랑 진행할 예정입니다.", stars: 5 },
 ];

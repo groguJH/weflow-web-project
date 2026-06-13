@@ -1,39 +1,22 @@
 'use client';
 
-import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { animateScroll as scroll } from 'react-scroll';
-import {
-  ArrowUp,
-  CheckCircle2,
-  FileStack,
-  MessageCircle,
-  Phone,
-  UserCircle,
-} from 'lucide-react';
-import { FLOATING_QUICK_MENU } from '@/data/commonText';
+import { CheckCircle2, MessageCircle, Phone } from 'lucide-react';
+import { FLOATING_CONTACT_CARD } from '@/data/commonText';
 
 const ICONS = {
-  top: ArrowUp,
+  check: CheckCircle2,
   message: MessageCircle,
   phone: Phone,
-  user: UserCircle,
-  check: CheckCircle2,
-  pages: FileStack,
 };
 
-const VARIANTS = {
-  default:
-    'border-white/[0.08] bg-slate-950/90 text-slate-200 hover:bg-slate-900 hover:text-white',
-  kakao:
-    'border-yellow-300/80 bg-yellow-300 text-slate-950 hover:bg-yellow-200',
-  primary:
-    'border-blue-500/70 bg-blue-600 text-white hover:bg-blue-500',
-  muted:
-    'border-slate-600/50 bg-slate-700 text-white hover:bg-slate-600',
+const ACTION_CLASSES = {
+  primary: 'quick-contact-action-primary',
+  outline: 'quick-contact-action-outline',
 };
 
-function getLinkProps(href) {
+function getAnchorProps(href) {
   if (!href?.startsWith('http')) return {};
 
   return {
@@ -42,29 +25,71 @@ function getLinkProps(href) {
   };
 }
 
-function QuickMenuContent({ item }) {
-  const Icon = ICONS[item.icon] ?? MessageCircle;
-
-  return (
+function FloatingAction({ action, onOpenDiagnosis, isPanelOpen }) {
+  const Icon = ICONS[action.icon] ?? MessageCircle;
+  const className = `quick-contact-action flex h-10 w-full cursor-pointer items-center justify-center gap-1.5 rounded-[0.875rem] px-3.5 text-xs font-black ${ACTION_CLASSES[action.variant] ?? ACTION_CLASSES.outline}`;
+  const content = (
     <>
-      <Icon size="1em" className={item.compactIcon ? 'text-[1rem]' : 'text-[1.375rem]'} aria-hidden="true" />
-      <span
-        className="block w-full whitespace-nowrap text-center text-[0.75rem] font-black leading-none"
-      >
-        {item.label}
-      </span>
+      <Icon size={15} strokeWidth={2.4} aria-hidden="true" />
+      <span>{action.label}</span>
     </>
   );
-}
 
-function quickMenuClass(item) {
-  const variant = VARIANTS[item.variant ?? 'default'] ?? VARIANTS.default;
+  if (action.modal) {
+    return (
+      <button
+        type="button"
+        onClick={onOpenDiagnosis}
+        className={className}
+        tabIndex={isPanelOpen ? undefined : -1}
+      >
+        {content}
+      </button>
+    );
+  }
 
-  return `flex min-h-[5rem] w-[5.5rem] cursor-pointer flex-col items-center justify-center gap-2 border px-2 py-3 text-center transition-colors duration-200 ${variant}`;
+  return (
+    <a
+      href={action.href}
+      className={className}
+      tabIndex={isPanelOpen ? undefined : -1}
+      {...getAnchorProps(action.href)}
+    >
+      {content}
+    </a>
+  );
 }
 
 export default function FloatingQuickMenu() {
   const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    if (!isOpen) return undefined;
+
+    function closeOnOutsideClick(event) {
+      if (menuRef.current?.contains(event.target)) {
+        return;
+      }
+
+      setIsOpen(false);
+    }
+
+    function closeOnEscape(event) {
+      if (event.key === 'Escape') {
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener('pointerdown', closeOnOutsideClick);
+    document.addEventListener('keydown', closeOnEscape);
+
+    return () => {
+      document.removeEventListener('pointerdown', closeOnOutsideClick);
+      document.removeEventListener('keydown', closeOnEscape);
+    };
+  }, [isOpen]);
 
   if (pathname?.startsWith('/admin')) {
     return null;
@@ -74,52 +99,52 @@ export default function FloatingQuickMenu() {
     window.dispatchEvent(new Event('open-diagnosis-modal'));
   }
 
-  function scrollToTop() {
-    scroll.scrollToTop({
-      duration: 650,
-      smooth: 'easeInOutQuart',
-    });
-  }
-
-  function handleAction(item) {
-    if (item.modal) {
-      openDiagnosisModal();
-      return;
-    }
-
-    if (item.action === 'scrollTop') {
-      scrollToTop();
-    }
-  }
-
   return (
-    <nav
-      aria-label="빠른 상담 메뉴"
-      className="floating-quick-menu fixed right-5 top-1/2 z-40 hidden -translate-y-1/2 flex-col border border-white/[0.08] bg-slate-950/50 md:flex"
+    <aside
+      ref={menuRef}
+      aria-label="빠른 상담 연결"
+      className="fixed right-4 bottom-4 z-[70] flex w-[15.25rem] max-w-[calc(100vw-2rem)] flex-col gap-2.5 sm:right-6 sm:bottom-6"
     >
-      {FLOATING_QUICK_MENU.map((item) =>
-        item.modal || item.action ? (
-          <button
-            key={item.label}
-            type="button"
-            onClick={() => handleAction(item)}
-            className={quickMenuClass(item)}
-            aria-label={item.label}
-          >
-            <QuickMenuContent item={item} />
-          </button>
-        ) : (
-          <Link
-            key={item.label}
-            href={item.href}
-            className={quickMenuClass(item)}
-            aria-label={item.label}
-            {...getLinkProps(item.href)}
-          >
-            <QuickMenuContent item={item} />
-          </Link>
-        )
-      )}
-    </nav>
+      <section
+        id="quick-contact-panel"
+        data-open={isOpen}
+        aria-hidden={!isOpen}
+        className="quick-contact-panel quick-contact-glass rounded-[1.375rem] p-4 text-slate-950"
+      >
+        <h2 className="mb-3.5 px-1 text-sm font-black leading-none tracking-normal text-slate-950">
+          {FLOATING_CONTACT_CARD.title}
+        </h2>
+        <div className="flex flex-col gap-2.5">
+          {FLOATING_CONTACT_CARD.actions.map((action) => (
+            <FloatingAction
+              key={action.label}
+              action={action}
+              onOpenDiagnosis={openDiagnosisModal}
+              isPanelOpen={isOpen}
+            />
+          ))}
+        </div>
+      </section>
+
+      <button
+        type="button"
+        onClick={() => setIsOpen((current) => !current)}
+        className="quick-contact-shortcut quick-contact-glass flex w-full cursor-pointer items-center justify-between rounded-[1.375rem] p-4 text-left text-slate-950"
+        aria-expanded={isOpen}
+        aria-controls="quick-contact-panel"
+      >
+        <div className="min-w-0">
+          <p className="quick-contact-shortcut-title text-sm font-black leading-tight text-slate-950">
+            {FLOATING_CONTACT_CARD.shortcut.title}
+          </p>
+          <p className="quick-contact-shortcut-subtitle mt-1 text-[0.6875rem] font-semibold leading-none text-slate-500">
+            {FLOATING_CONTACT_CARD.shortcut.subtitle}
+          </p>
+        </div>
+        <span className="quick-contact-shortcut-badge ml-3 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-black text-white">
+          {FLOATING_CONTACT_CARD.shortcut.badge}
+        </span>
+      </button>
+    </aside>
   );
 }

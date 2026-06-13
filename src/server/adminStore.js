@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs';
 import path from 'path';
-import { CASES_PAGE } from '@/data/casesText';
+import { CASES_PAGE, getCaseSlug } from '@/data/casesText';
 
 export const ADMIN_SESSION_COOKIE = 'weflow_admin_session';
 
@@ -34,13 +34,18 @@ function createId(prefix) {
 }
 
 function normalizeCaseItem(item, index) {
-  return {
+  const normalized = {
     id: item.id || `case-${String(index + 1).padStart(3, '0')}`,
     title: item.title || '',
     category: item.category || '',
     blogHref: item.blogHref || '#',
     img: item.img || '',
     updatedAt: item.updatedAt || null,
+  };
+
+  return {
+    ...normalized,
+    slug: getCaseSlug({ ...normalized, slug: item.slug }),
   };
 }
 

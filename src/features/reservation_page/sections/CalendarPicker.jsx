@@ -1,12 +1,22 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const DAY_NAMES = ['일', '월', '화', '수', '목', '금', '토'];
+const DAY_NAMES = ["일", "월", "화", "수", "목", "금", "토"];
 const MONTH_NAMES = [
-  '1월', '2월', '3월', '4월', '5월', '6월',
-  '7월', '8월', '9월', '10월', '11월', '12월',
+  "1월",
+  "2월",
+  "3월",
+  "4월",
+  "5월",
+  "6월",
+  "7월",
+  "8월",
+  "9월",
+  "10월",
+  "11월",
+  "12월",
 ];
 
 export default function CalendarPicker({ selectedDate, onSelect }) {
@@ -69,8 +79,8 @@ export default function CalendarPicker({ selectedDate, onSelect }) {
           disabled={isCurrentMonth}
           className={`p-2 rounded-lg transition-colors ${
             isCurrentMonth
-              ? 'text-slate-700 cursor-not-allowed'
-              : 'text-slate-400 hover:text-white hover:bg-white/[0.06]'
+              ? "text-slate-700 cursor-not-allowed"
+              : "text-slate-400 hover:text-white hover:bg-white/[0.06]"
           }`}
         >
           <ChevronLeft size="1em" className="text-[1.125rem]" />
@@ -92,7 +102,11 @@ export default function CalendarPicker({ selectedDate, onSelect }) {
           <div
             key={d}
             className={`text-center text-xs font-medium py-1 ${
-              i === 0 ? 'text-red-400/60' : i === 6 ? 'text-blue-400/60' : 'text-slate-500'
+              i === 0
+                ? "text-red-400/60"
+                : i === 6
+                  ? "text-blue-400/60"
+                  : "text-slate-500"
             }`}
           >
             {d}
@@ -100,43 +114,65 @@ export default function CalendarPicker({ selectedDate, onSelect }) {
         ))}
       </div>
 
-      <div className="grid grid-cols-7 gap-1">
-        {days.map((day, idx) => {
-          const colIndex = idx % 7;
+      <div className="grid grid-cols-7 gap-x-1 gap-y-5">
+        {days.map((day, index) => {
+          const colIndex = index % 7;
           const isSun = colIndex === 0;
           const isSat = colIndex === 6;
+
           const past = isPast(day);
           const selected = isSelected(day);
           const todayFlag = isToday(day);
 
-          let cls =
-            'relative aspect-square flex items-center justify-center rounded-full text-xs font-medium transition-all duration-150 ';
+          let buttonClassName =
+            "relative flex h-11 items-center justify-center text-base font-medium transition-all duration-150";
+
+          let circleClassName =
+            "relative flex h-10 w-10 items-center justify-center rounded-full transition-all duration-150";
 
           if (!day) {
-            cls += 'invisible';
+            buttonClassName += " invisible";
           } else if (past) {
-            cls += 'text-slate-700 cursor-not-allowed';
+            buttonClassName += " cursor-not-allowed text-slate-700";
           } else if (selected) {
-            cls += 'bg-cyan-500 text-white shadow-lg shadow-cyan-500/30 scale-105';
+            buttonClassName += " cursor-pointer";
+            circleClassName +=
+              " bg-cyan-700 text-white shadow-lg shadow-cyan-500/30";
           } else {
-            cls += `cursor-pointer hover:bg-white/[0.08] ${
-              isSun ? 'text-red-400' : isSat ? 'text-blue-400' : 'text-slate-200'
+            buttonClassName += " cursor-pointer";
+
+            circleClassName += ` hover:bg-white/[0.08] ${
+              isSun
+                ? "text-red-400"
+                : isSat
+                  ? "text-blue-400"
+                  : "text-slate-200"
             }`;
-            if (todayFlag) cls += ' ring-1 ring-cyan-500/50';
+
+            if (todayFlag) {
+              circleClassName += " ring-1 ring-cyan-500/50";
+            }
           }
 
           return (
             <button
-              key={idx}
+              key={index}
               type="button"
               disabled={!day || past}
-              onClick={() => day && !past && onSelect(new Date(year, month, day))}
-              className={cls}
+              onClick={() => {
+                if (!day || past) return;
+
+                onSelect(new Date(year, month, day));
+              }}
+              className={buttonClassName}
             >
-              {day}
-              {todayFlag && !selected && (
-                <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-cyan-500" />
-              )}
+              <span className={circleClassName}>
+                {day}
+
+                {todayFlag && !selected && (
+                  <span className="absolute bottom-1 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-cyan-500" />
+                )}
+              </span>
             </button>
           );
         })}

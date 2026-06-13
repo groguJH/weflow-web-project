@@ -1,6 +1,7 @@
 export const RESERVATION_PAGE = {
   title: "예약",
-  subtitle: "원하시는 날짜와 시간대를 선택해 무료 상담을 예약하세요.",
+  subtitle:
+    "원하시는 날짜와 시간대를 선택해 무료 상담을 예약하면 맞춤 견적을 제공합니다.",
   timeSlots: [
     "09:00",
     "09:30",
@@ -8,6 +9,8 @@ export const RESERVATION_PAGE = {
     "10:30",
     "11:00",
     "11:30",
+    "12:00",
+    "12:30",
     "13:00",
     "13:30",
     "14:00",
@@ -20,9 +23,6 @@ export const RESERVATION_PAGE = {
     "17:30",
     "18:00",
     "18:30",
-    "19:00",
-    "19:30",
-    "20:00",
   ],
   form: {
     name: { label: "이름", placeholder: "이름을 입력해주세요" },
@@ -33,13 +33,12 @@ export const RESERVATION_PAGE = {
         "랜딩 페이지 제작",
         "홈페이지 제작",
         "랜딩 & 홈페이지 제작",
-        "기타",
+        "기타 (WEFLOW 케어플랜)",
       ],
     },
     timePrefer: {
       label: "원하시는 시간대",
-      hourPlaceholder: "시간 선택 ",
-      minutePlaceholder: "분 선택",
+      placeholder: " 예) 오전 10시 30분 이후, 오후 2시 이후 ...",
     },
     industry: {
       label: "업종",

@@ -2,7 +2,7 @@ import { REVIEWS } from '@/data/commonText';
 
 function StarRating({ count }) {
   return (
-    <span className="text-yellow-400 text-sm" aria-label={`${count}점 만점 후기`}>
+    <span className="text-sm text-yellow-400" aria-label={`${count}점 만점 후기`}>
       {'★'.repeat(count)}
     </span>
   );
@@ -14,20 +14,27 @@ function ReviewCard({ review, size, direction }) {
   const textClass = isVertical
     ? 'mt-3 text-sm sm:mt-4 sm:text-base'
     : isLarge
-    ? 'mt-4 text-base sm:mt-5 sm:text-lg'
+    ? 'mt-3 text-[clamp(0.78rem,1.4vw,0.92rem)]'
     : 'mt-2 text-sm';
 
   return (
     <article
-      className={`flex-shrink-0 rounded-2xl border border-white/[0.07] bg-slate-900/60 backdrop-blur-sm transition-all duration-300 hover:border-blue-500/25 ${
+      className={`flex-shrink-0 rounded-2xl border border-white/[0.07] bg-slate-900/60 backdrop-blur-sm transition-all duration-300 hover:border-blue-500/25 hover:bg-slate-900/80 ${
         isVertical
           ? 'mx-auto flex min-h-[8.75rem] w-full max-w-2xl flex-col justify-between p-4 sm:min-h-[9.5rem] sm:p-5 lg:max-w-3xl'
           : isLarge
-          ? 'mx-2 flex min-h-[12.5rem] w-[min(18rem,calc(100vw-2.5rem))] flex-col justify-between p-5 sm:mx-4 sm:min-h-[15rem] sm:w-[28rem] sm:p-8 lg:min-h-[17rem]'
+          ? 'mx-2 flex min-h-[clamp(7rem,12vw,8.25rem)] w-[min(17rem,calc(100vw-2.5rem))] flex-col justify-between p-[clamp(1rem,2vw,1.25rem)] sm:mx-3 sm:w-[18.5rem]'
           : 'mx-3 w-72 rounded-xl p-5'
       }`}
     >
-      <StarRating count={review.stars} />
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+        <StarRating count={review.stars} />
+        {review.author && (
+          <span className="text-keep text-[clamp(0.68rem,1.15vw,0.78rem)] font-bold text-slate-300">
+            - {review.author}
+          </span>
+        )}
+      </div>
       <p className={`text-pretty text-keep ${textClass} leading-relaxed text-slate-300`}>
         &ldquo;{review.text}&rdquo;
       </p>
@@ -51,9 +58,42 @@ function ReviewList({ reviews, size, direction, hidden = false }) {
   );
 }
 
-export default function ReviewSlider({ size = 'default', direction = 'horizontal', duration = 78 }) {
+function splitReviewsIntoRows(reviews, rowCount) {
+  const perRow = Math.ceil(reviews.length / rowCount);
+
+  return Array.from({ length: rowCount }, (_, idx) =>
+    reviews.slice(idx * perRow, (idx + 1) * perRow)
+  ).filter((row) => row.length > 0);
+}
+
+function MarqueeRow({ reviews, size, duration, reverse = false, label }) {
+  const doubled = [...reviews, ...reviews];
+
+  return (
+    <ul
+      className="flex animate-marquee"
+      aria-label={label}
+      style={{
+        animationDuration: `${duration}s`,
+        animationDirection: reverse ? 'reverse' : 'normal',
+      }}
+    >
+      {doubled.map((review, i) => (
+        <li key={`${review.author || 'review'}-${i}`} aria-hidden={i >= reviews.length}>
+          <ReviewCard review={review} size={size} direction="horizontal" />
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+export default function ReviewSlider({
+  size = 'default',
+  direction = 'horizontal',
+  duration = 78,
+  rows = 1,
+}) {
   const isVertical = direction === 'vertical';
-  const doubled = [...REVIEWS, ...REVIEWS];
 
   if (isVertical) {
     return (
@@ -69,15 +109,30 @@ export default function ReviewSlider({ size = 'default', direction = 'horizontal
     );
   }
 
+  if (rows > 1) {
+    const reviewRows = splitReviewsIntoRows(REVIEWS, rows);
+
+    return (
+      <div className="w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_7%,black_93%,transparent)]">
+        <div className="flex flex-col gap-[clamp(1.5rem,3.4vw,2.35rem)]">
+          {reviewRows.map((reviews, idx) => (
+            <MarqueeRow
+              key={`review-row-${idx + 1}`}
+              reviews={reviews}
+              size={size}
+              duration={duration + idx * 8}
+              reverse={idx % 2 === 1}
+              label={idx === 0 ? '고객 후기 목록' : undefined}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="overflow-hidden w-full">
-      <ul className="flex animate-marquee" aria-label="고객 후기 목록">
-        {doubled.map((review, i) => (
-          <li key={i} aria-hidden={i >= REVIEWS.length}>
-            <ReviewCard review={review} size={size} direction={direction} />
-          </li>
-        ))}
-      </ul>
+      <MarqueeRow reviews={REVIEWS} size={size} duration={duration} label="고객 후기 목록" />
     </div>
   );
 }

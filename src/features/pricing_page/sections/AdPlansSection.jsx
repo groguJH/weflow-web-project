@@ -1,88 +1,152 @@
-import { Search, MapPin } from 'lucide-react';
-import SectionHeader from '@/components/ui/SectionHeader';
-import InfoNotice from '@/components/ui/InfoNotice';
-import { AD_PLANS, PRICING_NOTICE } from '@/data/pricingText';
+import Link from "next/link";
+import { MapPin, Search } from "lucide-react";
+import SectionHeader from "@/components/ui/SectionHeader";
+import InfoNotice from "@/components/ui/InfoNotice";
+import TiltPricingCard from "@/components/ui/TiltPricingCard";
+import {
+  AD_PLANS,
+  PRICING_NOTICE,
+  PRICING_DETAIL_NOTICE,
+} from "@/data/pricingText";
 
 const THEME = {
   green: {
-    border: 'border-l-4 border-l-green-500',
-    iconBg: 'bg-green-500/10 border-green-500/20',
+    border: "border-l-4 border-l-green-500",
+    iconBg: "bg-green-500/10 border-green-500/20",
     icon: Search,
-    iconColor: 'text-green-400',
-    price: 'text-green-400',
-    tag: 'border-green-500/30 text-green-400 bg-green-500/5',
-    btn: 'bg-green-600 hover:bg-green-500 text-white',
+    iconColor: "text-green-400",
+    title: "text-green-300",
+    price: "text-green-300",
+    checkBg: "bg-green-400/10",
+    checkText: "text-green-300",
+    button: "bg-green-600 text-white hover:bg-green-500",
   },
   orange: {
-    border: 'border-l-4 border-l-orange-500',
-    iconBg: 'bg-orange-500/10 border-orange-500/20',
+    border: "border-l-4 border-l-orange-500",
+    iconBg: "bg-orange-500/10 border-orange-500/20",
     icon: MapPin,
-    iconColor: 'text-orange-400',
-    price: 'text-orange-400',
-    tag: 'border-orange-500/30 text-orange-400 bg-orange-500/5',
-    btn: 'bg-orange-600 hover:bg-orange-500 text-white',
+    iconColor: "text-orange-400",
+    title: "text-orange-300",
+    price: "text-orange-300",
+    checkBg: "bg-orange-400/10",
+    checkText: "text-orange-300",
+    button: "bg-orange-600 text-white hover:bg-orange-500",
   },
 };
 
 export default function AdPlansSection() {
   return (
-    <section className="relative py-16 px-4 sm:px-6 lg:px-8 overflow-hidden" aria-labelledby="ad-plans-title">
-      <div className="absolute top-0 right-1/3 w-80 h-80 bg-cyan-400/6 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-1/3 w-80 h-80 bg-blue-600/8 rounded-full blur-3xl pointer-events-none" />
-      <SectionHeader titleId="ad-plans-title" title={AD_PLANS.sectionTitle} className="mb-12" />
+    <section
+      className="relative overflow-hidden px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20"
+      aria-labelledby="ad-plans-title"
+    >
+      <div className="pointer-events-none absolute right-1/3 top-0 h-80 w-80 rounded-full bg-cyan-400/6 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-blue-600/8 blur-3xl" />
 
-      <ul className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-        {AD_PLANS.plans.map((plan) => {
-          const t = THEME[plan.theme];
-          const Icon = t.icon;
+      <SectionHeader
+        titleId="ad-plans-title"
+        title={AD_PLANS.sectionTitle}
+        className="mb-12"
+      />
+
+      <ul className="relative mx-auto grid w-full max-w-[40rem] grid-cols-1 gap-5 sm:gap-6">
+        {AD_PLANS.plans.map((plan, index) => {
+          const theme = THEME[plan.theme] || THEME.green;
+          const Icon = theme.icon;
+
           return (
-            <li
-              key={plan.name}
-              className={`flex flex-col bg-slate-900/50 backdrop-blur-sm border border-slate-800/60 rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg min-h-[34.625rem] ${t.border}`}
-            >
-              {/* Icon + name */}
-              <div className="flex items-center gap-3 mb-5">
-                <div className={`w-10 h-10 rounded-xl border flex items-center justify-center flex-shrink-0 ${t.iconBg}`}>
-                  <Icon size="1em" className={`${t.iconColor} text-[1.125rem]`} aria-hidden="true" />
-                </div>
-                <h3 className="text-lg font-black text-white">{plan.name}</h3>
-              </div>
-
-              {/* Price */}
-              <p className={`text-2xl font-black mb-3 ${t.price}`}>{plan.price}</p>
-
-              {/* Description */}
-              <p className="text-sm text-slate-400 leading-relaxed mb-6 whitespace-pre-line">{plan.desc}</p>
-
-              {/* Tags */}
-              <div className="flex flex-wrap gap-1.5 mt-auto">
-                {plan.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className={`px-2 py-1 rounded-full border text-[0.625rem] font-medium ${t.tag}`}
+            <li key={plan.name}>
+              <TiltPricingCard
+                name={`ad-plan-${plan.theme}`}
+                delay={index * 90}
+                direction={index % 2 === 0 ? "left" : "right"}
+                className={`p-[clamp(1.125rem,1.5rem,1.5rem)] ${theme.border}`}
+              >
+                <div className="mb-5 flex items-center gap-3">
+                  <div
+                    className={`flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border ${theme.iconBg}`}
                   >
-                    {tag}
-                  </span>
-                ))}
-              </div>
+                    <Icon
+                      size="1em"
+                      className={`${theme.iconColor} text-[1.125rem]`}
+                      aria-hidden="true"
+                    />
+                  </div>
+
+                  <div>
+                    <h3
+                      className={`text-[clamp(1.15rem,1.35rem,1.35rem)] font-black leading-snug ${theme.title}`}
+                    >
+                      {plan.name}
+                    </h3>
+                    <p className="mt-1 text-[0.875rem] text-slate-400">
+                      {plan.subtitle}
+                    </p>
+                  </div>
+                </div>
+
+                <ul className="mb-6 space-y-3">
+                  {plan.checklist.map((item) => (
+                    <li key={item.item} className="flex items-start gap-3">
+                      <span
+                        className={`mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full text-[0.75rem] font-black ${theme.checkBg} ${theme.checkText}`}
+                      >
+                        ✓
+                      </span>
+                      <span className="text-[1rem] leading-relaxed text-slate-300">
+                        {item.item}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mb-6 border-t border-dashed border-slate-700/80 pt-5">
+                  <p className="mb-1 text-[1rem] font-semibold text-slate-500 line-through decoration-red-400 decoration-2">
+                    {plan.originalPrice}
+                  </p>
+
+                  <div className="flex flex-wrap items-end gap-2">
+                    <span
+                      className={`text-[clamp(2rem,2.45rem,2.45rem)] font-black leading-none ${theme.price}`}
+                    >
+                      {plan.price}
+                    </span>
+                    <span className="mb-1 rounded-full border border-red-400/30 bg-red-500/10 px-2 py-0.5 text-[0.6875rem] font-bold text-red-300">
+                      파격 세일
+                    </span>
+                  </div>
+
+                  <p className="mt-2 text-[0.75rem] text-slate-500">
+                    {PRICING_NOTICE}
+                  </p>
+                </div>
+
+                <Link
+                  href="/reservation"
+                  className={`block rounded-xl py-3 text-center text-[1rem] font-bold transition-all ${theme.button}`}
+                >
+                  신청하기
+                </Link>
+              </TiltPricingCard>
             </li>
           );
         })}
       </ul>
 
-      <div className="flex justify-center mt-8">
-        <InfoNotice>
-          {PRICING_NOTICE}
-        </InfoNotice>
-      </div>
+      <div className="mt-8 flex flex-col items-center gap-4">
+        <InfoNotice>{PRICING_NOTICE}</InfoNotice>
 
-      {/* 도메인 안내 */}
-      <div className="text-center mt-6 space-y-1">
-        <p className="text-xs text-slate-500">도메인은 고객님 명의로 등록되며 비용은 별도입니다.</p>
-        <p className="text-xs text-slate-500">위플로우에서 등록 및 연결 세팅은 무료 지원해드립니다.</p>
-        <p className="text-xs text-slate-500">✓ 도메인 연결 지원 &nbsp;&nbsp; ✓ 도메인 등록 대행 가능</p>
-        <p className="text-xs text-slate-500">※ 도메인 비용 별도</p>
-        <p className="text-xs text-slate-500">※ 광고비는 고객 계정에서 고객 결제수단으로 직접 결제되며, 위플로우는 운영 및 세팅만 진행합니다.</p>
+        <ul className="w-full max-w-[40rem] space-y-2 rounded-2xl border border-slate-800/70 bg-slate-900/40 p-5">
+          {PRICING_DETAIL_NOTICE.map((notice) => (
+            <li
+              key={notice}
+              className="flex items-start gap-2 text-[0.75rem] leading-relaxed text-slate-500"
+            >
+              <span className="mt-0.5 flex-shrink-0 text-cyan-400">✓</span>
+              <span>{notice}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

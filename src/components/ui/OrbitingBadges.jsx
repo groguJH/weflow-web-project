@@ -38,6 +38,7 @@ export default function OrbitingBadges({
   duration = 32,
   reverse = false,
   hoverLift = '-0.35rem',
+  interactive = true,
 }) {
   "use no memo";
 
@@ -67,7 +68,7 @@ export default function OrbitingBadges({
         {items.map((item) => (
           <div
             key={item.title}
-            className="pointer-events-auto absolute left-1/2 top-1/2"
+            className={`${interactive ? 'pointer-events-auto' : 'pointer-events-none'} absolute left-1/2 top-1/2`}
             style={{
               transform: `translate(-50%, -50%) rotate(${item.angle}deg) translateX(var(--orbit-radius)) rotate(${-item.angle}deg)`,
             }}
@@ -75,7 +76,7 @@ export default function OrbitingBadges({
             <motion.div
               className="relative"
               animate={reduceMotion ? undefined : { rotate: counterSpin }}
-              whileHover={reduceMotion ? undefined : { y: hoverLift, zIndex: 30 }}
+              whileHover={reduceMotion || !interactive ? undefined : { y: hoverLift, zIndex: 30 }}
               transition={reduceMotion ? undefined : { rotate: transition }}
             >
               <OrbitBadge item={item} />

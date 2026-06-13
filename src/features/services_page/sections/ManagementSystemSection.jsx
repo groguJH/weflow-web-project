@@ -66,7 +66,9 @@ export default function ManagementSystemSection() {
                       <span className="flex-shrink-0 text-base leading-tight mt-0.5">{item.icon}</span>
                       <div>
                         <p className="text-sm font-bold text-white leading-tight">{item.title}</p>
-                        <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">{item.desc}</p>
+                        {item.desc && (
+                          <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">{item.desc}</p>
+                        )}
                       </div>
                     </li>
                   ))}

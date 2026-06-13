@@ -1,5 +1,5 @@
 import ServiceProcessSection from '@/features/services_page/sections/ServiceProcessSection';
-import ManagementSystemSection from '@/features/services_page/sections/ManagementSystemSection';
+// import ManagementSystemSection from '@/features/services_page/sections/ManagementSystemSection';
 import { createPageMetadata } from '@/data/metadata';
 
 export const metadata = createPageMetadata({
@@ -13,7 +13,8 @@ export default function ServicesPage() {
   return (
     <div className="pt-[4.5rem]">
       <ServiceProcessSection />
-      <ManagementSystemSection />
+      {/* DETAIL / 광고 운영 · 사후관리 시스템 섹션은 현재 사용하지 않음 */}
+      {/* <ManagementSystemSection /> */}
     </div>
   );
 }

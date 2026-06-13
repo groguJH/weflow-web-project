@@ -1,14 +1,17 @@
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://weflowlab.kr';
-export const SITE_NAME = 'WEFLOW';
-export const SITE_TITLE = 'WEFLOW — 문의로 이어지는 홈페이지를 만듭니다';
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://weflowlab.kr";
+export const SITE_NAME = "WEFLOW";
+export const SITE_SMALL_TITLE =
+  "메인 배너 랜딩&홈페이지 제작 · 광고 운영 · 검색 상단 노출 · 맞춤형 웹 솔루션";
+export const SITE_TITLE = "WEFLOW — 문의로 이어지는 홈페이지를 만듭니다";
 export const SITE_DESCRIPTION =
-  '홈페이지 제작부터 광고 연동·운영 관리까지, 단순 제작이 아닌 문의 구조까지 설계합니다.';
-export const OG_IMAGE = '/main_icon.png';
+  "홈페이지 제작부터 광고 연동·운영 관리까지\n단순 제작이 아닌 문의 구조까지 설계합니다.";
+export const OG_IMAGE = "/main_icon.png";
 
 export function createPageMetadata({
   title,
   description = SITE_DESCRIPTION,
-  path = '/',
+  path = "/",
   images = [OG_IMAGE],
   noIndex = false,
 }) {
@@ -24,11 +27,11 @@ export function createPageMetadata({
       url: path,
       siteName: SITE_NAME,
       images,
-      locale: 'ko_KR',
-      type: 'website',
+      locale: "ko_KR",
+      type: "website",
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title,
       description,
       images,

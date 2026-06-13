@@ -1,12 +1,11 @@
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import ReviewSlider from "@/components/ui/ReviewSlider";
+import DiagnosisModalButton from "@/components/ui/DiagnosisModalButton";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function ReviewSection() {
   return (
     <section
-      className="relative flex min-h-[calc(100vh-4.5rem)] flex-col justify-center overflow-hidden py-16 sm:py-20 lg:py-24"
+      className="relative flex min-h-[calc(100vh-4.5rem)] flex-col justify-center overflow-hidden px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24"
       aria-labelledby="home-reviews-title"
     >
       <div className="absolute top-0 left-0 w-80 h-80 bg-cyan-400/6 rounded-full blur-3xl pointer-events-none" />
@@ -16,32 +15,21 @@ export default function ReviewSection() {
       <ScrollReveal
         as="header"
         name="home-reviews-heading"
-        className="relative mx-auto mb-8 flex w-full max-w-7xl flex-col items-center px-4 text-center sm:mb-10 sm:px-6 lg:px-8"
+        className="relative mx-auto mb-[clamp(3.25rem,7vw,6rem)] flex w-full max-w-7xl items-center justify-between gap-4"
       >
         <h2
           id="home-reviews-title"
-          className="text-keep text-3xl font-black text-white sm:text-4xl lg:text-5xl"
+          className="fluid-section-title text-keep font-black text-white"
         >
           고객 후기
         </h2>
+        <DiagnosisModalButton className="text-keep inline-flex cursor-pointer items-center justify-center whitespace-nowrap text-[clamp(0.78rem,1.25vw,0.9rem)] font-bold text-blue-300 transition-colors duration-200 hover:text-cyan-300">
+          후기 더보기 →
+        </DiagnosisModalButton>
       </ScrollReveal>
 
       <ScrollReveal name="home-reviews-slider" delay={120}>
-        <ReviewSlider size="large" direction="vertical" duration={88} />
-      </ScrollReveal>
-
-      <ScrollReveal
-        name="home-reviews-more"
-        delay={180}
-        className="relative mt-8 flex justify-center px-4 sm:mt-10"
-      >
-        {/* <Link
-          href="/reservation"
-          className="group inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-white/[0.08] bg-slate-900/70 px-6 py-3 text-sm font-bold text-white transition-[background-color,color,transform] duration-200 hover:-translate-y-0.5 hover:bg-slate-800/95 hover:text-white active:translate-y-0"
-        >
-          후기 더보기
-          <ArrowRight size="1em" className="text-[1rem] transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
-        </Link> */}
+        <ReviewSlider size="large" direction="horizontal" duration={58} rows={2} />
       </ScrollReveal>
     </section>
   );

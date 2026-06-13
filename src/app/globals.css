@@ -32,6 +32,83 @@
   to { background-position: 56% 44%; }
 }
 
+@keyframes heroCtaShadowPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0.75rem 1.75rem rgba(37, 99, 235, 0.24),
+      0 0 0 rgba(34, 211, 238, 0);
+  }
+
+  50% {
+    box-shadow:
+      0 1rem 2.35rem rgba(37, 99, 235, 0.42),
+      0 0 1.2rem rgba(34, 211, 238, 0.24);
+  }
+}
+
+@keyframes processWaterSweep {
+  0% {
+    opacity: 0;
+    transform: translateX(-35%) skewX(-12deg);
+  }
+
+  18% {
+    opacity: 0.62;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(430%) skewX(-12deg);
+  }
+}
+
+@keyframes diagnosisItemIn {
+  from {
+    opacity: 0;
+    transform: translateY(0.7rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes diagnosisCtaPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0.8rem 1.7rem rgba(37, 99, 235, 0.25),
+      0 0 0 rgba(34, 211, 238, 0);
+  }
+
+  50% {
+    box-shadow:
+      0 1rem 2.25rem rgba(14, 165, 233, 0.4),
+      0 0 1.35rem rgba(34, 211, 238, 0.32);
+  }
+}
+
+@keyframes reservationSubtitleHighlight {
+  0% {
+    color: #94a3b8;
+    transform: translateY(0);
+  }
+
+  38% {
+    color: #ffffff;
+    transform: translateY(-0.22rem);
+    text-shadow: 0 0 0.8rem rgba(34, 211, 238, 0.22);
+  }
+
+  100% {
+    color: #cbd5e1;
+    transform: translateY(0);
+    text-shadow: none;
+  }
+}
+
 .animate-marquee {
   animation: marquee 35s linear infinite;
 }
@@ -53,6 +130,7 @@ body {
   background-image: radial-gradient(rgba(148, 163, 184, 0.07) 0.0625rem, transparent 0.0625rem);
   background-size: 1.5rem 1.5rem;
   color: #f1f5f9;
+  overflow-x: clip;
   word-break: keep-all;
   overflow-wrap: break-word;
   -webkit-font-smoothing: antialiased;
@@ -61,7 +139,22 @@ body {
 
 html {
   font-size: clamp(0.875em, var(--mobile-root-scale), 1.0625em);
+  overflow-x: clip;
   scroll-behavior: smooth;
+}
+
+main,
+section,
+header,
+footer {
+  min-width: 0;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
 }
 
 @media (min-width: 48em) {
@@ -95,10 +188,171 @@ html {
   text-wrap: pretty;
 }
 
+.fluid-scale-hero-title {
+  font-size: clamp(1.35rem, 2.6vw, 2.9rem);
+  line-height: 1;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.fluid-scale-hero-copy {
+  font-size: clamp(0.55rem, 2vw, 0.875rem);
+  line-height: 1.45;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.fluid-scale-hero-description {
+  font-size: clamp(0.7rem, 2.15vw, 1rem);
+  line-height: 1.55;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.hero-cta-button {
+  padding:
+    clamp(0.625rem, 1.9vw, 0.75rem)
+    clamp(0.25rem, 1.7vw, 0.875rem);
+  font-size: clamp(0.5rem, 2.15vw, 0.75rem);
+  line-height: 1;
+  text-align: center;
+}
+
+.hero-primary-cta-pulse {
+  animation: heroCtaShadowPulse 2.4s ease-in-out infinite;
+}
+
+.fluid-section-title {
+  font-size: clamp(1.65rem, 4.2vw, 3rem);
+  line-height: 1.12;
+  letter-spacing: 0;
+}
+
+.fluid-section-copy {
+  font-size: clamp(0.875rem, 1.65vw, 1.125rem);
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+
+.fluid-card-title {
+  font-size: clamp(1rem, 2.4vw, 1.875rem);
+  line-height: 1.18;
+  letter-spacing: 0;
+}
+
+.fluid-card-copy {
+  font-size: clamp(0.8125rem, 1.45vw, 1.125rem);
+  line-height: 1.58;
+  letter-spacing: 0;
+}
+
+.fluid-section-button {
+  padding:
+    clamp(0.75rem, 1.35vw, 0.875rem)
+    clamp(1rem, 2.5vw, 1.75rem);
+  font-size: clamp(0.8125rem, 1.35vw, 0.875rem);
+  line-height: 1;
+}
+
+.fluid-benefit-card {
+  min-height: clamp(19.75rem, 41vw, 28.5rem);
+}
+
+.fluid-benefit-media {
+  height: clamp(12rem, 25vw, 17rem);
+}
+
+.fluid-case-card {
+  min-height: clamp(15rem, 34vw, 25rem);
+}
+
+.fluid-case-media {
+  min-height: clamp(10rem, 24vw, 17rem);
+}
+
+.fluid-process-card {
+  min-height: clamp(9.5rem, 20vw, 16rem);
+}
+
+.process-water-sweep {
+  opacity: 0;
+  transform: translateX(-35%) skewX(-12deg);
+  will-change: opacity, transform;
+}
+
+.process-tilt-card:hover .process-water-sweep,
+.process-tilt-card:focus-within .process-water-sweep {
+  animation: processWaterSweep 0.82s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.diagnosis-item {
+  opacity: 0;
+  transform: translateY(0.7rem);
+}
+
+.diagnosis-card.scroll-reveal {
+  transition:
+    opacity 0.38s ease,
+    transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--scroll-reveal-delay, 0ms);
+}
+
+.diagnosis-card.is-visible .diagnosis-item {
+  animation: diagnosisItemIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--diagnosis-item-delay, 0ms);
+}
+
+.diagnosis-cta-pulse {
+  animation: diagnosisCtaPulse 2.35s ease-in-out infinite;
+}
+
+.reservation-subtitle-highlight {
+  display: inline-block;
+  color: #94a3b8;
+  font-weight: 800;
+  animation: reservationSubtitleHighlight 0.72s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--reservation-subtitle-delay, 0ms);
+}
+
 @media (max-width: 47.999rem) {
   .text-balance,
   .text-pretty {
     text-wrap: pretty;
+  }
+
+  .fluid-scale-hero-title {
+    font-size: clamp(1.16rem, 4.85vw, 1.55rem);
+  }
+
+  .fluid-scale-hero-copy {
+    font-size: clamp(0.5rem, 1.95vw, 0.6875rem);
+    line-height: 1.28;
+  }
+
+  .fluid-scale-hero-description {
+    font-size: clamp(0.625rem, 2.35vw, 0.8125rem);
+    line-height: 1.42;
+  }
+}
+
+@media (min-width: 40rem) {
+  .hero-cta-button {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.875rem;
+  }
+}
+
+@media (min-width: 48rem) and (max-width: 63.999rem) {
+  .fluid-scale-hero-title {
+    font-size: clamp(1.35rem, 2.8vw, 1.65rem);
+  }
+
+  .fluid-scale-hero-copy {
+    font-size: clamp(0.6875rem, 1.45vw, 0.8125rem);
+  }
+
+  .fluid-scale-hero-description {
+    font-size: clamp(0.8125rem, 1.65vw, 0.9375rem);
   }
 }
 
@@ -161,6 +415,34 @@ html {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hero-primary-cta-pulse {
+    animation: none;
+  }
+
+  .diagnosis-cta-pulse {
+    animation: none;
+  }
+
+  .reservation-subtitle-highlight {
+    animation: none;
+    color: #cbd5e1;
+    transform: none;
+    text-shadow: none;
+  }
+
+  .process-water-sweep {
+    animation: none !important;
+  }
+
+  .diagnosis-item {
+    opacity: 1;
+    transform: none;
+  }
+
+  .diagnosis-card.is-visible .diagnosis-item {
+    animation: none;
+  }
+
   .scroll-reveal {
     opacity: 1;
     transform: none;
@@ -206,13 +488,186 @@ html {
   z-index: 1;
 }
 
-.floating-quick-menu {
-  display: none;
+.mobile-side-cta {
+  background: #3b82f6;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
-@media (min-width: 48rem) {
-  .floating-quick-menu {
-    display: flex;
+.mobile-side-cta:hover,
+.mobile-side-cta:focus-visible {
+  background: #2563eb;
+}
+
+.mobile-side-cta:active {
+  transform: translateY(1px);
+}
+
+.mobile-side-cta > span {
+  position: relative;
+  z-index: 1;
+}
+
+.quick-contact-glass {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: none;
+  backdrop-filter: blur(1.125rem) saturate(1.08);
+  transition:
+    border-color 0.22s ease,
+    background 0.22s ease,
+    transform 0.22s ease,
+    opacity 0.22s ease;
+}
+
+.quick-contact-glass::before {
+  content: none;
+}
+
+.quick-contact-glass:hover,
+.quick-contact-glass:focus-visible,
+.quick-contact-glass:focus-within {
+  border-color: rgba(147, 197, 253, 0.9);
+  background: rgba(248, 250, 252, 0.98);
+}
+
+.quick-contact-glass > * {
+  position: relative;
+  z-index: 1;
+}
+
+.quick-contact-shortcut {
+  transition:
+    border-color 0.22s ease,
+    background 0.22s ease,
+    color 0.22s ease;
+}
+
+.quick-contact-shortcut-title,
+.quick-contact-shortcut-subtitle,
+.quick-contact-shortcut-badge {
+  transition:
+    background 0.22s ease,
+    color 0.22s ease;
+}
+
+.quick-contact-shortcut:hover,
+.quick-contact-shortcut:focus-visible {
+  border-color: rgba(226, 232, 240, 0.95);
+  background: rgba(239, 246, 255, 0.98);
+}
+
+.quick-contact-shortcut:hover .quick-contact-shortcut-title,
+.quick-contact-shortcut:focus-visible .quick-contact-shortcut-title {
+  color: #1d4ed8;
+}
+
+.quick-contact-shortcut:hover .quick-contact-shortcut-subtitle,
+.quick-contact-shortcut:focus-visible .quick-contact-shortcut-subtitle {
+  color: #2563eb;
+}
+
+.quick-contact-shortcut:hover .quick-contact-shortcut-badge,
+.quick-contact-shortcut:focus-visible .quick-contact-shortcut-badge {
+  background: #1d4ed8;
+}
+
+.quick-contact-panel {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(0.75rem) scale(0.98);
+  transition:
+    max-height 0.26s ease,
+    padding-top 0.26s ease,
+    padding-bottom 0.26s ease,
+    opacity 0.2s ease,
+    transform 0.26s ease;
+}
+
+.quick-contact-panel[data-open="true"] {
+  max-height: 16rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+.quick-contact-action {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(203, 213, 225, 0.9);
+  box-shadow: none;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.quick-contact-action::before {
+  content: none;
+}
+
+.quick-contact-action > * {
+  position: relative;
+  z-index: 1;
+}
+
+.quick-contact-action:hover,
+.quick-contact-action:focus-visible {
+  border-color: rgba(125, 211, 252, 0.9);
+  box-shadow: none;
+}
+
+.quick-contact-action-primary {
+  border-color: rgba(37, 99, 235, 0.95);
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.quick-contact-action-primary:hover,
+.quick-contact-action-primary:focus-visible {
+  border-color: rgba(29, 78, 216, 0.95);
+  background: #1d4ed8;
+}
+
+.quick-contact-action-primary::before {
+  content: none;
+}
+
+.quick-contact-action-outline {
+  background: rgba(255, 255, 255, 0.92);
+  color: #0f172a;
+}
+
+.quick-contact-action-outline:hover,
+.quick-contact-action-outline:focus-visible {
+  background: rgba(239, 246, 255, 0.98);
+  color: #1d4ed8;
+}
+
+.quick-contact-action-outline::before {
+  content: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quick-contact-glass,
+  .quick-contact-panel,
+  .quick-contact-action {
+    transition: none;
+  }
+
+  .quick-contact-action:hover,
+  .quick-contact-action:focus-visible {
+    transform: none;
   }
 }
 
@@ -271,12 +726,6 @@ html {
 @media (min-width: 48rem) {
   .admin-dashboard-card .ant-card-body {
     padding: 1.5rem;
-  }
-}
-
-@media (max-width: 47.999rem) {
-  .floating-quick-menu {
-    display: none !important;
   }
 }
 
