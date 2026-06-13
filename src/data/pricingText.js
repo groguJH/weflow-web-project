@@ -95,8 +95,8 @@ export const CARE_PLANS = {
       tier: "ALL-IN-ONE",
       name: "WEFLOW CARE",
       subtitle: "올인원 관리 플랜",
-      originalPrice: "월 678,000원~",
-      price: "월 339,000원~",
+      originalPrice: "월 578,000원~",
+      price: "월 289,000원~",
       isTop: true,
       checklist: [
         { ok: true, item: "유지보수 : 무제한" },

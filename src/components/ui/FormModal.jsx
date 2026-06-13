@@ -88,18 +88,20 @@ export default function FormModal() {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+      className="fixed inset-0 z-[100] flex items-end justify-center p-0 md:items-center md:p-4"
       onClick={close}
     >
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
 
       <div
-        className="relative w-full max-w-md bg-slate-900/95 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-6 shadow-2xl shadow-black/50 animate-modal-in"
+        className="diagnosis-modal-panel relative max-h-[calc(100dvh-1rem)] w-full overflow-y-auto rounded-t-[1.5rem] border border-white/[0.08] bg-slate-900/95 p-5 pb-[calc(env(safe-area-inset-bottom,0rem)+1.25rem)] shadow-2xl shadow-black/50 backdrop-blur-xl md:max-w-md md:rounded-2xl md:p-6"
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
         aria-labelledby="diagnosis-modal-title"
       >
+        <div className="mx-auto mb-4 h-1 w-10 rounded-full bg-white/25 md:hidden" aria-hidden="true" />
+
         {/* 상단 글로우 */}
         <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-64 h-16 bg-blue-500/20 rounded-full blur-2xl pointer-events-none" />
 
@@ -133,7 +135,7 @@ export default function FormModal() {
                   id="diagnosis-name"
                   type="text" name="name" value={form.name} onChange={handleChange}
                   placeholder={STICKY_FORM.fields.name.placeholder} required
-                  className="w-full bg-slate-800/60 border border-white/[0.08] rounded-lg px-3 py-2.5 text-sm text-white placeholder-slate-500"
+                  className="w-full rounded-lg border border-white/[0.08] bg-slate-800/60 px-3 py-2.5 text-sm text-white placeholder-slate-500"
                 />
               </FormField>
 
@@ -142,7 +144,7 @@ export default function FormModal() {
                   id="diagnosis-phone"
                   type="tel" name="phone" value={form.phone} onChange={handleChange}
                   placeholder={STICKY_FORM.fields.phone.placeholder} required
-                  className="w-full bg-slate-800/60 border border-white/[0.08] rounded-lg px-3 py-2.5 text-sm text-white placeholder-slate-500"
+                  className="w-full rounded-lg border border-white/[0.08] bg-slate-800/60 px-3 py-2.5 text-sm text-white placeholder-slate-500"
                 />
               </FormField>
 
@@ -150,7 +152,7 @@ export default function FormModal() {
                 <select
                   id="diagnosis-type"
                   name="type" value={form.type} onChange={handleChange} required
-                  className="w-full bg-slate-800/60 border border-white/[0.08] rounded-lg px-3 py-2.5 text-sm text-white"
+                  className="w-full rounded-lg border border-white/[0.08] bg-slate-800/60 px-3 py-2.5 text-sm text-white"
                 >
                   <option value="">선택해주세요</option>
                   {STICKY_FORM.fields.type.options.map((opt) => (
@@ -164,7 +166,7 @@ export default function FormModal() {
                   id="diagnosis-industry"
                   type="text" name="industry" value={form.industry} onChange={handleChange}
                   placeholder={STICKY_FORM.fields.industry.placeholder} required
-                  className="w-full bg-slate-800/60 border border-white/[0.08] rounded-lg px-3 py-2.5 text-sm text-white placeholder-slate-500"
+                  className="w-full rounded-lg border border-white/[0.08] bg-slate-800/60 px-3 py-2.5 text-sm text-white placeholder-slate-500"
                 />
               </FormField>
 
@@ -173,7 +175,7 @@ export default function FormModal() {
                   id="diagnosis-request"
                   name="request" value={form.request} onChange={handleChange}
                   placeholder={STICKY_FORM.fields.request.placeholder} rows={3}
-                  className="w-full bg-slate-800/60 border border-white/[0.08] rounded-lg px-3 py-2.5 text-sm text-white placeholder-slate-500 resize-none"
+                  className="w-full resize-none rounded-lg border border-white/[0.08] bg-slate-800/60 px-3 py-2.5 text-sm text-white placeholder-slate-500"
                 />
               </FormField>
 

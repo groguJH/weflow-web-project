@@ -1,7 +1,22 @@
-import { CheckCircle2, Code2, LayoutTemplate, Megaphone, MessageSquare, Palette, Search } from 'lucide-react';
-import { SERVICE_PROCESS } from '@/data/servicesText';
+import {
+  CheckCircle2,
+  Code2,
+  LayoutTemplate,
+  Megaphone,
+  MessageSquare,
+  Palette,
+  Search,
+} from "lucide-react";
+import { SERVICE_PROCESS } from "@/data/servicesText";
 
-const ICONS = [MessageSquare, LayoutTemplate, Palette, Code2, Search, Megaphone];
+const ICONS = [
+  MessageSquare,
+  LayoutTemplate,
+  Palette,
+  Code2,
+  Search,
+  Megaphone,
+];
 
 function StepCard({ step, icon: Icon }) {
   const hasMultipleSubItems = Array.isArray(step.desc);
@@ -55,7 +70,11 @@ function StepCard({ step, icon: Icon }) {
                 key={point}
                 className="flex items-center gap-2 rounded-xl border border-white/[0.07] bg-white/[0.035] px-[clamp(0.75rem,1.6vw,1rem)] py-[clamp(0.65rem,1.3vw,0.8rem)] text-[clamp(0.74rem,1.15vw,0.86rem)] font-bold text-slate-200"
               >
-                <CheckCircle2 size="1em" className="shrink-0 text-cyan-300" aria-hidden="true" />
+                <CheckCircle2
+                  size="1em"
+                  className="shrink-0 text-cyan-300"
+                  aria-hidden="true"
+                />
                 <span>{point}</span>
               </li>
             ))}
@@ -70,19 +89,25 @@ export default function ServiceProcessSection() {
   const { sectionTitle, sectionDescription, steps } = SERVICE_PROCESS;
 
   return (
-    <section className="relative px-4 py-[clamp(5rem,10vw,8rem)] sm:px-6 lg:px-8" aria-labelledby="service-process-title">
+    <section
+      className="relative px-4 py-[clamp(5rem,10vw,8rem)] sm:px-6 lg:px-8"
+      aria-labelledby="service-process-title"
+    >
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/10 to-transparent pointer-events-none" />
 
       <div className="relative mx-auto max-w-6xl">
         <h2
           id="service-process-title"
-          className="text-keep text-center text-[clamp(2rem,5vw,4rem)] font-black leading-tight text-white"
+          className="text-keep text-center text-3xl font-black leading-tight text-white sm:text-4xl"
         >
           {sectionTitle}
         </h2>
         <p className="text-keep mx-auto mt-[clamp(1.4rem,3vw,2rem)] flex max-w-3xl flex-col gap-[clamp(0.4rem,0.9vw,0.65rem)] text-center text-[clamp(0.95rem,1.8vw,1.15rem)] font-bold leading-relaxed text-slate-300">
           {sectionDescription.map((line, idx) => (
-            <span key={line} className={idx === 1 ? 'text-cyan-100' : undefined}>
+            <span
+              key={line}
+              className={idx === 1 ? "text-cyan-100" : undefined}
+            >
               {line}
             </span>
           ))}

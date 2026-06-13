@@ -12,6 +12,7 @@ export default function ScrollReveal({
   delay = 0,
   threshold = 0.14,
   rootMargin = '0px 0px -12% 0px',
+  ...props
 }) {
   const ref = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -44,6 +45,7 @@ export default function ScrollReveal({
       ref={ref}
       className={`scroll-reveal ${isVisible ? 'is-visible' : ''} ${className} ${innerClassName}`}
       style={{ '--scroll-reveal-delay': `${delay}ms` }}
+      {...props}
     >
       {name && <Element name={name} className="scroll-reveal-anchor" />}
       {children}

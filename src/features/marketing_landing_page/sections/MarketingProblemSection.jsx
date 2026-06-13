@@ -1,10 +1,15 @@
-import SectionHeader from '@/components/ui/SectionHeader';
-import { MARKETING_PROBLEMS } from '@/data/marketingLandingText';
+import SectionHeader from "@/components/ui/SectionHeader";
+import TiltPricingCard from "@/components/ui/TiltPricingCard";
+import { MARKETING_PROBLEMS } from "@/data/marketingLandingText";
 
 export default function MarketingProblemSection() {
   return (
-    <section className="relative overflow-hidden px-4 py-16 sm:px-6 lg:px-8" aria-labelledby="marketing-problem-title">
-      <div className="absolute left-1/2 top-0 h-64 w-[34rem] -translate-x-1/2 rounded-full bg-blue-600/7 blur-3xl" />
+    <section
+      className="relative overflow-hidden px-4 py-16 sm:px-6 lg:px-8"
+      aria-labelledby="marketing-problem-title"
+    >
+      <div className="pointer-events-none absolute left-1/2 top-0 h-64 w-[34rem] -translate-x-1/2 rounded-full bg-blue-600/7 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-0 right-1/4 h-72 w-72 rounded-full bg-cyan-400/6 blur-3xl" />
 
       <div className="relative mx-auto max-w-6xl">
         <SectionHeader
@@ -16,19 +21,37 @@ export default function MarketingProblemSection() {
           className="mb-10"
         />
 
-        <ul className="grid gap-4 md:grid-cols-3">
-          {MARKETING_PROBLEMS.items.map((item, index) => (
-            <li key={item.title} className="rounded-2xl border border-white/[0.08] bg-slate-900/55 p-6">
-              <span className="mb-5 flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-400/25 bg-cyan-400/10 text-sm font-black text-cyan-300">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-              <h3 className="text-keep text-lg font-black text-white">{item.title}</h3>
-              <p className="text-pretty text-keep mt-3 text-sm leading-relaxed text-slate-400">
-                {item.description}
-              </p>
-            </li>
-          ))}
-        </ul>
+        <div className="mx-auto w-full max-w-[46rem]">
+          <TiltPricingCard
+            name="marketing-problem-glass-card"
+            direction="left"
+            className="p-[clamp(1.5rem,3vw,2.5rem)] text-center"
+          >
+            <div className="mx-auto mb-7 flex max-w-2xl flex-wrap justify-center gap-2">
+              {["인스타", "스레드", "블로그", "카카오톡", "당근 플레이스"].map(
+                (channel) => (
+                  <span
+                    key={channel}
+                    className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-[0.75rem] font-bold text-cyan-200 transition-colors duration-300 group-hover:border-white/25 group-hover:bg-white/[0.08] group-hover:text-white"
+                  >
+                    {channel}
+                  </span>
+                ),
+              )}
+            </div>
+
+            <div className="mx-auto flex max-w-3xl flex-col gap-3">
+              {MARKETING_PROBLEMS.paragraphs.map((text) => (
+                <p
+                  key={text}
+                  className="text-keep text-pretty text-[0.95rem] font-semibold leading-relaxed text-slate-300 transition-colors duration-300 group-hover:text-slate-100 sm:text-[1.05rem]"
+                >
+                  {text}
+                </p>
+              ))}
+            </div>
+          </TiltPricingCard>
+        </div>
       </div>
     </section>
   );

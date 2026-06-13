@@ -27,6 +27,11 @@
   to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
+@keyframes bottomSheetIn {
+  from { opacity: 0; transform: translateY(100%); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 @keyframes headerCtaGradient {
   from { background-position: 48% 52%; }
   to { background-position: 56% 44%; }
@@ -125,6 +130,14 @@
   animation: modalIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+.diagnosis-modal-panel {
+  animation: bottomSheetIn 0.26s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.mobile-diagnosis-bar {
+  bottom: calc(env(safe-area-inset-bottom, 0rem) + 1rem);
+}
+
 body {
   background-color: #0a0f1e;
   background-image: radial-gradient(rgba(148, 163, 184, 0.07) 0.0625rem, transparent 0.0625rem);
@@ -160,6 +173,10 @@ canvas {
 @media (min-width: 48em) {
   html {
     font-size: clamp(0.9375em, var(--tablet-root-scale), 1.0625em);
+  }
+
+  .diagnosis-modal-panel {
+    animation: modalIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 }
 
@@ -447,6 +464,10 @@ canvas {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  .diagnosis-modal-panel {
+    animation: none;
   }
 }
 

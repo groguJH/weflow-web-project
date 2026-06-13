@@ -19,10 +19,12 @@ export default function LandingAdPlansSection() {
             </div>
 
             <ul className="space-y-2.5 flex-1 mb-6">
-              {plan.tags.map((tag) => (
-                <li key={tag} className="flex items-start gap-2.5">
+              {(plan.tags ?? plan.checklist ?? []).map((tag) => (
+                <li key={typeof tag === 'string' ? tag : tag.item} className="flex items-start gap-2.5">
                   <span className="mt-0.5 font-bold text-sm text-blue-400" aria-hidden="true">✓</span>
-                  <span className="text-sm text-slate-300">{tag}</span>
+                  <span className="text-sm text-slate-300">
+                    {typeof tag === 'string' ? tag : tag.item}
+                  </span>
                 </li>
               ))}
             </ul>

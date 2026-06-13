@@ -1,78 +1,83 @@
 export const MARKETING_HERO = {
-  eyebrow: 'WEFLOW Marketing Landing',
-  title: ['브랜드를 알리고', '문의까지 이어지는', '회사 홍보 랜딩페이지'],
+  eyebrow: 'WEFLOW CARE PLAN',
+  title: ['문의로 이어지는', '홈페이지를 만듭니다'],
   description:
-    '회사 소개, 서비스 강점, 성공 사례, 상담 신청 흐름을 한 화면에 담아 방문자가 빠르게 신뢰하고 문의하도록 설계합니다.',
-  primaryCta: '무료 진단 신청',
-  secondaryCta: '제작 플랜 보기',
+    '기획부터 제작, 광고 연동, 운영 관리까지 WEFLOW가 함께합니다.',
+  primaryCta: '무료 진단 후 견적받기',
+  secondaryCta: '실제 제작 성공 보기',
   metrics: [
-    { value: '3~7일', label: '빠른 제작' },
+    { value: '3~4일', label: '랜딩페이지 제작' },
+    { value: '약 1주일', label: '홈페이지 제작' },
     { value: '24시간', label: '상담 가능' },
-    { value: 'All-in-one', label: '제작·광고·관리' },
   ],
 };
 
 export const MARKETING_PROBLEMS = {
-  eyebrow: 'Why Marketing Landing',
-  title: '홍보 페이지는 예쁜 소개보다 전환 구조가 중요합니다',
-  description:
-    '방문자는 짧은 시간 안에 회사를 판단합니다. WEFLOW는 신뢰 요소와 상담 동선을 함께 설계해 홍보가 문의로 이어지도록 만듭니다.',
-  items: [
-    {
-      title: '첫 화면에서 업종과 강점 전달',
-      description: '방문자가 3초 안에 무엇을 잘하는 회사인지 이해하도록 핵심 메시지를 정리합니다.',
-    },
-    {
-      title: '서비스 흐름과 증거 배치',
-      description: '제작 과정, 가격, 사례, 후기 등 의사결정에 필요한 정보를 순서대로 보여줍니다.',
-    },
-    {
-      title: '상담 버튼과 폼 최적화',
-      description: '전화, 카카오, 무료진단 폼을 자연스럽게 연결해 문의 이탈을 줄입니다.',
-    },
+  eyebrow: 'Conversion Marketing',
+  title: '홈페이지만 필요한 시대는 지났습니다',
+  description: '사람들은 검색하고 비교한 뒤 문의합니다.',
+  paragraphs: [
+    '인스타, 스레드, 블로그, 카카오톡, 당근 플레이스 등 고객은 여러 채널을 거쳐 브랜드를 확인합니다.',
+    '어디에 맡길지, 광고는 어떻게 해야 할지 고민되셨나요?',
+    'WEFLOW는 랜딩페이지 + 홈페이지 + 광고 + 사후관리까지 저렴한 비용과 높은 퀄리티로 한 번에 해결합니다.',
   ],
 };
 
 export const MARKETING_SERVICES = {
-  eyebrow: 'WEFLOW Builds',
-  title: '회사 홍보 랜딩페이지에 필요한 요소를 한 번에 구성합니다',
+  eyebrow: 'All-in-one Care',
+  title: 'WEFLOW CARE PLAN',
+  description: '제작부터 운영 · 광고 · 관리까지 한 번에',
   items: [
-    '브랜드 메시지 정리',
-    '서비스 소개 섹션',
-    '가격·플랜 안내',
-    '성공 사례 카드',
-    '후기·신뢰 요소',
-    '상담 CTA와 문의폼',
+    {
+      title: '빠른 제작 진행',
+      description: '랜딩페이지 3~4일, 홈페이지 약 1주일. 빠르게 제작하고 빠르게 운영 시작합니다.',
+    },
+    {
+      title: '합리적인 비용',
+      description: '불필요한 비용 없이 필요한 기능만 구성하여 가성비 + 실속 + 퀄리티를 함께 제공합니다.',
+    },
+    {
+      title: '24시간 상담 가능',
+      description: '정해진 시간만 기다리지 마세요. 문의가 생길 때 언제든 빠른 상담 및 피드백 가능합니다.',
+    },
+    {
+      title: '제작 후 운영 관리',
+      description: '홈페이지 만들고 끝이 아닙니다. 검색 등록, 수정, 유지보수, 운영 관리까지 함께합니다.',
+    },
+    {
+      title: '광고 연동 지원',
+      description: '홈페이지 + 랜딩페이지 + 광고를 한 번에 연결하여 문의가 들어오는 구조를 만듭니다.',
+    },
   ],
 };
 
 export const MARKETING_PROOF = {
-  eyebrow: 'Conversion Flow',
-  title: '홍보에서 상담까지 끊기지 않는 흐름',
+  eyebrow: 'Inquiry Structure',
+  title: '문의 증가 구조 설계',
   steps: [
     {
       number: '01',
-      title: '인지',
-      description: '메인 카피와 대표 비주얼로 브랜드를 빠르게 각인합니다.',
+      title: '업종별 고객 흐름 분석',
+      description: '업종 특성에 맞게 고객이 검색하고 비교한 뒤 문의하는 흐름을 분석합니다.',
     },
     {
       number: '02',
-      title: '신뢰',
-      description: '사례, 후기, 프로세스, 운영 시스템을 통해 선택 이유를 보여줍니다.',
+      title: '상담 버튼 위치 최적화',
+      description: '고객이 가장 많이 보는 위치에 상담 버튼과 문의 CTA를 배치합니다.',
     },
     {
       number: '03',
-      title: '문의',
-      description: '고정 CTA, 무료진단 모달, 예약 페이지로 상담 행동을 유도합니다.',
+      title: '모바일 문의 동선 구성',
+      description: '모바일 사용자가 전화, 카카오톡, 무료진단으로 바로 이어지도록 동선을 구성합니다.',
     },
   ],
 };
 
 export const MARKETING_CONTACT = {
   eyebrow: 'Start With WEFLOW',
-  title: '회사 홍보용 랜딩페이지가 필요하다면 지금 바로 상담하세요',
+  title: '무료진단에서 이런 걸 확인해드립니다',
   description:
-    '현재 홍보 목적, 업종, 필요한 기능을 알려주시면 전환 구조에 맞춘 제작 방향을 제안드립니다.',
+    '문의 구조 진단, 디자인 점검, 검색 노출 분석, 문의 개선 제안을 확인하고 제작 방향을 안내받을 수 있습니다.',
   primaryCta: '무료진단 후 견적받기',
-  secondaryCta: '예약하기',
+  items: ['문의 구조 진단', '디자인 점검', '검색 노출 분석', '문의 개선 제안'],
 };

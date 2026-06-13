@@ -5,6 +5,11 @@ import { AlignLeft } from 'lucide-react';
 import FormField from '@/components/ui/FormField';
 import { STICKY_FORM } from '@/data/commonText';
 
+const FORM_SOURCE = {
+  'landing-form': '랜딩 sticky 폼',
+  'marketing-form': '마케팅 랜딩 문의폼',
+};
+
 export default function StickyForm({ id = 'sticky-form' }) {
   const [form, setForm] = useState({
     name: '',
@@ -33,7 +38,7 @@ export default function StickyForm({ id = 'sticky-form' }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...form,
-          source: id === 'landing-form' ? '랜딩 sticky 폼' : '무료진단 폼',
+          source: FORM_SOURCE[id] ?? '무료진단 폼',
         }),
       });
       const data = await response.json();
